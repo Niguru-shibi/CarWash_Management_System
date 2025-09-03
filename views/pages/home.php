@@ -33,8 +33,7 @@
             max-width: 1200px;
             z-index: 1030;
             margin: 0;
-            background: linear-gradient(90deg, rgba(2, 28, 60, 0.95) 0%, rgba(3, 105, 161, 0.85) 100%);
-            /* darker blue */
+            background: linear-gradient(to right, #000000, #555555, #ffffff);
             backdrop-filter: blur(15px);
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -48,7 +47,7 @@
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            background: linear-gradient(to right, #00c6ff, #0072ff);
+            background: linear-gradient(to right, #e0e0e0, #555555);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: flex;
@@ -95,7 +94,7 @@
             height: 3px;
             bottom: -6px;
             left: 0;
-            background: linear-gradient(to right, #38bdf8, #3b82f6);
+            background: linear-gradient(to right, #333333, #cccccc);
             transition: width 0.3s ease;
             border-radius: 10px;
         }
@@ -105,9 +104,10 @@
         }
 
         .nav-links a:hover {
-            color: #38bdf8;
-            text-shadow: 0 0 10px #38bdf8;
+            color: #e0e0e0;
+            text-shadow: 0 0 6px rgba(224, 224, 224, 0.6);
         }
+
 
         .hamburger {
             display: none;
@@ -173,6 +173,16 @@
         .carousel-control-next {
             display: none;
         }
+
+        .carousel-inner,
+        .carousel-item,
+        .carousel-item img {
+            height: 100vh;
+        }
+
+        .carousel-item img {
+            object-fit: cover;
+        }
     </style>
 </head>
 
@@ -191,6 +201,7 @@
             <a href="#">Services</a>
             <a href="#">Washing Plan</a>
             <a href="#">Washing Point</a>
+            <a href="#">Book Now</a>
             <a href="#">Contact</a>
         </div>
     </nav>
@@ -209,11 +220,11 @@
             <!-- Slides -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://thumbs.dreamstime.com/b/banner-car-wash-business-features-backdrop-being-washed-space-copy-341228888.jpg"
+                    <img src="https://i.pinimg.com/1200x/62/4c/eb/624ceb1dde337b8e178f266963f018dd.jpg"
                         class="d-block w-100" alt="Slide 1" />
                 </div>
                 <div class="carousel-item">
-                    <img src="https://thumbs.dreamstime.com/b/background-image-car-wash-promotion-white-soap-foam-body-washing-wallpaper-344293512.jpg"
+                    <img src="https://i.pinimg.com/1200x/48/15/6d/48156d0b461632742767c7b953ebdf62.jpg"
                         class="d-block w-100" alt="Slide 2" />
                 </div>
                 <div class="carousel-item">
@@ -223,43 +234,6 @@
             </div>
         </div>
 
-        
-
-        <!--<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators"> <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button> <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class="active" aria-current="true"></button> <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button> </div>
-        <div class="carousel-inner">
-            <div class="carousel-item"> <svg aria-hidden="true" class="bd-placeholder-img " height="100vh" preserveAspectRatio="xMidYMid slice" width="100%" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100%" height="100vh" fill="var(--bs-secondary-color)"></rect>
-                </svg>
-                <div class="container">
-                    <div class="carousel-caption text-start">
-                        <h1>Example headline.</h1>
-                        <p class="opacity-75">Some representative placeholder content for the first slide of the carousel.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item active"> <svg aria-hidden="true" class="bd-placeholder-img " height="100vh" preserveAspectRatio="xMidYMid slice" width="100%" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100%" height="100vh" fill="var(--bs-secondary-color)"></rect>
-                </svg>
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1>Another example headline.</h1>
-                        <p>Some representative placeholder content for the second slide of the carousel.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item"> <svg aria-hidden="true" class="bd-placeholder-img " height="100vh" preserveAspectRatio="xMidYMid slice" width="100%" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100%" height="100vh" fill="var(--bs-secondary-color)"></rect>
-                </svg>
-                <div class="container">
-                    <div class="carousel-caption text-end">
-                        <h1>One more for good measure.</h1>
-                        <p>Some representative placeholder content for the third slide of this carousel.</p>
-                    </div>
-                </div>
-            </div>
-        </div> <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span> </button> <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </button>
-    </div>-->
 
         <script>
             function toggleMenu() {
