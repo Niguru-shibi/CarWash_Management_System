@@ -68,7 +68,6 @@
     .nav-links {
       display: flex;
       gap: 2rem;
-      transition: all 0.3s ease;
       align-items: center;
     }
 
@@ -140,7 +139,81 @@
     .carousel-indicators .active {
       background-color: #2563eb;
     }
+
+    /* Captions */
+    .carousel-caption {
+      position: absolute;
+      top: 25%;
+      left: 10%;
+      text-align: left;
+      max-width: 600px;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .carousel-caption h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .carousel-caption p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-appointment {
+      padding: 10px 20px;
+      background: #0ea5e9;
+      border: none;
+      color: white;
+      font-weight: 600;
+      border-radius: 25px;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .btn-appointment:hover {
+      background: #2563eb;
+      transform: scale(1.05);
+    }
+
+    .contact-info {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .contact-info i {
+      margin-right: 8px;
+      color: #38bdf8;
+    }
+
+    /* Fade animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media(max-width:768px) {
+      .carousel-caption h1 {
+        font-size: 2rem;
+      }
+
+      .carousel-caption p {
+        font-size: 1rem;
+      }
+    }
   </style>
+  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -168,23 +241,70 @@
           <a href="#" class="login-btn">Login</a>
         </div>
       </nav>
-      <!-- Slides -->
-      <div class="carousel-inner">
-        <!-- Slide 1 -->
-        <div class="carousel-item active">
-          <img src="https://i.pinimg.com/1200x/62/4c/eb/624ceb1dde337b8e178f266963f018dd.jpg" alt="Car Wash 1">
-        </div>
 
-        <!-- Slide 2 -->
-        <div class="carousel-item">
-          <img src="https://i.pinimg.com/1200x/48/15/6d/48156d0b461632742767c7b953ebdf62.jpg" alt="Car Wash 2">
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-item">
-          <img src="https://cdn.prod.website-files.com/62680100be4ef509fad9aba5/67ca2bc40733c278e4da4578_Car-covered-white-foam.webp" alt="Car Wash 3">
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <img src="https://i.pinimg.com/1200x/62/4c/eb/624ceb1dde337b8e178f266963f018dd.jpg" alt="Car Wash 1">
+        <div class="carousel-caption">
+          <h1>Premium Car Wash Service</h1>
+          <p>
+            At <strong>Auto Shine</strong>, we believe your car deserves more than just a wash –
+            it deserves a full transformation. Our team uses high-quality cleaning products and
+            advanced techniques to remove every speck of dirt, dust, and grime, leaving your vehicle
+            sparkling inside and out. Whether it’s a quick wash or a deep clean, we make sure your car
+            looks showroom-ready every time.
+          </p>
+          <a href="#appointment" class="btn-appointment">Get Appointment</a>
+          <div class="contact-info">
+            <p><i class="fas fa-map-marker-alt"></i> 123 Shine Street, Auto City</p>
+            <p><i class="fas fa-phone-alt"></i> (123) 456-7890</p>
+            <p><i class="fas fa-envelope"></i> info@autoshine.com</p>
+          </div>
         </div>
       </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <img src="https://i.pinimg.com/1200x/48/15/6d/48156d0b461632742767c7b953ebdf62.jpg" alt="Car Wash 2">
+        <div class="carousel-caption">
+          <h1>Fast & Reliable Cleaning</h1>
+          <p>
+            We know your time is valuable. That’s why we’ve designed our wash process to be
+            <strong>fast, reliable, and stress-free</strong>. With state-of-the-art equipment and
+            expert staff, we guarantee a spotless clean in record time – without compromising quality.
+            Drive in during your lunch break or on your way home, and leave with a car that’s refreshed,
+            polished, and ready to turn heads.
+          </p>
+          <a href="#appointment" class="btn-appointment">Get Appointment</a>
+          <div class="contact-info">
+            <p><i class="fas fa-map-marker-alt"></i> 123 Shine Street, Auto City</p>
+            <p><i class="fas fa-phone-alt"></i> (123) 456-7890</p>
+            <p><i class="fas fa-envelope"></i> info@autoshine.com</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <img src="https://cdn.prod.website-files.com/62680100be4ef509fad9aba5/67ca2bc40733c278e4da4578_Car-covered-white-foam.webp" alt="Car Wash 3">
+        <div class="carousel-caption">
+          <h1>Shine Like Never Before</h1>
+          <p>
+            Give your car the shine it deserves! Our detailing experts go the extra mile to protect your
+            paint, restore its natural glow, and keep your vehicle looking as good as new. From gentle hand
+            washes to deep foam treatments, we provide care that enhances the beauty of your car while
+            preserving its value. At <strong>Auto Shine</strong>, it’s not just a wash – it’s a promise to
+            make your car stand out wherever you go.
+          </p>
+          <a href="#appointment" class="btn-appointment">Get Appointment</a>
+          <div class="contact-info">
+            <p><i class="fas fa-map-marker-alt"></i> 123 Shine Street, Auto City</p>
+            <p><i class="fas fa-phone-alt"></i> (123) 456-7890</p>
+            <p><i class="fas fa-envelope"></i> info@autoshine.com</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 

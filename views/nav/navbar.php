@@ -4,49 +4,136 @@
         position: sticky !important;
         top: 0;
         z-index: 1000;
-        height: 60px;
+        height: 70px;
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
-    .custom-nav .custom-ul {
+
+    .custom-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        position: relative;
+    }
+
+    .custom-ul {
         list-style: none;
         display: flex;
         flex-wrap: wrap;
-        gap: 20px;
-        padding: 0;
+        gap: 30px;
         margin: 0;
-        margin-right: 10rem;
-        background-color: rgba(50, 50, 50, 0.5);
+        padding: 10px 30px;
         border-radius: 50px;
-        padding: 0px 20px;
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        transition: max-height 0.4s ease, opacity 0.4s ease;
     }
-    .custom-nav .custom-ul .nav-link {
+
+    .custom-ul li {
+        list-style: none;
+    }
+
+    .custom-ul a {
+        text-decoration: none;
         color: white;
-        font-weight: 500;
-        transition: color 0.3s ease;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        padding: 8px 15px;
+        border-radius: 8px;
     }
-    .custom-nav .custom-ul .nav-link:hover {
-        color: #ffc107;
+
+    .custom-ul a:hover {
+        background: #ffc107;
+        color: #000;
+    }
+
+    /* Hamburger */
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        position: absolute;
+        right: 20px;
+        cursor: pointer;
+    }
+
+    .hamburger div {
+        width: 26px;
+        height: 3px;
+        background: white;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+
+    .hamburger.open div:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.open div:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.open div:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+        .custom-ul {
+            position: absolute;
+            top: 70px;
+            left: 0;
+            right: 0;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 0;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .custom-ul.open {
+            max-height: 400px;
+            opacity: 1;
+            padding: 1rem 0;
+        }
+
+        .hamburger {
+            display: flex;
+        }
     }
 </style>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary custom-navbar shadow custom-nav">
-    <div class="container-fluid px-4">
-        <a class="navbar-brand ms-5" href="#home" style="padding-left: 10rem;">
-            <img src="../images/cwms-logo.png" alt="Logo" height="58" />
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#customNavbarNav"
-            aria-controls="customNavbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="nav-links" id="navLinks">
-              <a href="#">Home</a>
-              <a href="#">About</a>
-              <a href="#">Services</a>
-              <a href="#">Washing Plan</a>
-              <a href="#">Washing Point</a>
-              <a href="#">Book Now</a>
-              <a href="#">Contact</a>
-            </div>
+<nav class="custom-navbar">
+    <div class="custom-nav">
+        <ul class="custom-ul" id="navLinks">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Washing Plan</a></li>
+            <li><a href="#">Washing Point</a></li>
+            <li><a href="#">Book Now</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
 </nav>
+
+<script>
+    function toggleMenu() {
+        const navLinks = document.getElementById("navLinks");
+        const hamburger = document.getElementById("hamburger");
+        navLinks.classList.toggle("open");
+        hamburger.classList.toggle("open");
+    }
+</script>
