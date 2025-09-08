@@ -16,16 +16,16 @@
         <?php include "pages/home.php"; ?>
     </section>
 
-    <!--<?php include "../nav/navbar.php"; ?>
+    <?php include "../views/nav/navbar.php"; ?>
 
     <section id="about">
-        <?php include "page/about.php"; ?>
+        <?php include "pages/about.php"; ?>
     </section>
 
     <section id="services">
-        <?php include "page/services.php"; ?>
+        <?php include "pages/services.php"; ?>
 
-        <?php include "page/offer.php"; ?>
+        <?php include "pages/offer.php"; ?>
     </section>
 
     <section id="location">
@@ -37,12 +37,12 @@
     </section>
 
     <section id="contact">
-        <?php include "page/contact.php"; ?>
+        <?php include "pages/contact.php"; ?>
     </section>
 
     <section>
         <?php include "../nav/footer.php"; ?>
-    </section>-->
+    </section>
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
