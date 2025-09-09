@@ -39,20 +39,34 @@
 
     /* Logo */
     .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #fff;
+      font-size: 1.9rem;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 2px;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 10px;
+      background: linear-gradient(45deg, #ffc107, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: transform 0.3s ease;
     }
 
     .logo i {
+      font-size: 1.9rem;
       color: #ffc107;
-      font-size: 1.6rem;
+      filter: drop-shadow(0 0 8px rgba(255, 193, 7, 0.6));
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.08);
+    }
+
+    .logo:hover i {
+      color: #fff;
+      transform: rotate(-10deg) scale(1.2);
     }
 
     /* Nav Links */
@@ -79,20 +93,10 @@
       position: relative;
     }
 
-    /* Underline animation */
-    .ul a::after {
-      content: "";
-      position: absolute;
-      width: 0;
-      height: 2px;
-      left: 0;
-      bottom: -5px;
-      background: #ffc107;
-      transition: width 0.3s ease;
-    }
-
-    .ul a:hover::after {
-      width: 100%;
+    /* Glow hover effect */
+    .ul a:hover {
+      color: #00eaff;
+      text-shadow: 0 0 8px rgba(0, 234, 255, 0.8);
     }
 
     /* Highlighted CTA */
@@ -182,13 +186,14 @@
 
     <!-- Links -->
     <ul class="ul" id="navLinks">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Washing Plan</a></li>
-      <li><a href="#">Washing Point</a></li>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#washingplan">Washing Plan</a></li>
+      <li><a href="#washingpoint">Washing Point</a></li>
       <li><a href="#" class="cta-btn">Book Now</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="../views/pages/login.php" class="login-btn">Login</a></li>
     </ul>
 
     <!-- Hamburger -->

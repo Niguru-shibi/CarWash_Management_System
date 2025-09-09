@@ -27,13 +27,13 @@
 
         <?php include "pages/offer.php"; ?>
     </section>
-
-    <section id="location">
-        <?php include "pages/washingpoint.php"; ?>
+    
+    <section id="washingplan">
+        <?php include "pages/washingplan.php"; ?>
     </section>
 
-    <section id="pricing">
-        <?php include "pages/washingplan.php"; ?>
+    <section id="washingpoint">
+        <?php include "pages/washingpoint.php"; ?>
     </section>
 
     <section id="contact">

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,18 +10,26 @@
   <style>
     /* Background with animated gradient */
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #001f3f, #004080, #0077b6);
+      background: linear-gradient(135deg, #001f54, #0a192f, #003566, #0d6efd);
       background-size: 300% 300%;
       animation: gradientBG 12s ease infinite;
       color: #fff;
+      padding: 5rem 0;
     }
 
+    /* Gradient Animation (same for all sections) */
     @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     /* Contact Section */
@@ -47,8 +56,15 @@
     }
 
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Left Info */
@@ -140,10 +156,10 @@
       pointer-events: none;
     }
 
-    .form-group input:focus + label,
-    .form-group input:not(:placeholder-shown) + label,
-    .form-group textarea:focus + label,
-    .form-group textarea:not(:placeholder-shown) + label {
+    .form-group input:focus+label,
+    .form-group input:not(:placeholder-shown)+label,
+    .form-group textarea:focus+label,
+    .form-group textarea:not(:placeholder-shown)+label {
       top: -10px;
       left: 40px;
       font-size: 0.75rem;
@@ -164,7 +180,7 @@
       cursor: pointer;
       font-size: 1rem;
       transition: all 0.3s ease;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
 
     .contact-form button:hover {
@@ -177,7 +193,7 @@
       margin-top: 2rem;
       border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
     }
 
     .map-container iframe {
@@ -192,23 +208,25 @@
         grid-template-columns: 1fr;
         text-align: center;
       }
+
       .contact-info {
         align-items: center;
       }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Contact Section -->
   <section class="contact-section">
     <div class="contact-container">
-      
+
       <!-- Left Info -->
       <div class="contact-info">
         <h1>Contact Us</h1>
         <p>Have questions or need to book a car wash? Our friendly team at <strong>Auto Shine</strong> is always ready to assist you. Reach out today and let’s make your ride shine like new.</p>
-        
+
         <div class="contact-item"><i class="fas fa-phone"></i> +1 234 567 890</div>
         <div class="contact-item"><i class="fas fa-envelope"></i> info@autoshine.com</div>
         <div class="contact-item"><i class="fas fa-map-marker-alt"></i> 123 Car Wash St, Auto City</div>
@@ -251,4 +269,5 @@
   </section>
 
 </body>
+
 </html>

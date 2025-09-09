@@ -121,7 +121,7 @@
     .carousel,
     .carousel-inner,
     .carousel-item {
-      height: 100vh;
+      height: 90vh;
       width: 100%;
     }
 
@@ -225,22 +225,7 @@
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></button>
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"></button>
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"></button>
-      </div>
-
-      <!--Navigation-->
-      <nav>
-        <div class="logo">AutoShine</div>
-        <div class="nav-links">
-          <a href="#">Home</a>
-          <a href="#">About</a>
-          <a href="#">Services</a>
-          <a href="#">Washing Plan</a>
-          <a href="#">Washing Point</a>
-          <a href="#">Book Now</a>
-          <a href="#">Contact</a>
-          <a href="#" class="login-btn">Login</a>
-        </div>
-      </nav>
+  </div>
 
       <!-- Slide 1 -->
       <div class="carousel-item active">
