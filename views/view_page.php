@@ -29,11 +29,11 @@
     </section>
 
     <section id="location">
-        <?php include "page/location.php"; ?>
+        <?php include "pages/washingpoint.php"; ?>
     </section>
 
     <section id="pricing">
-        <?php include "page/pricing.php"; ?>
+        <?php include "pages/washingplan.php"; ?>
     </section>
 
     <section id="contact">
@@ -41,7 +41,7 @@
     </section>
 
     <section>
-        <?php include "../nav/footer.php"; ?>
+        <?php include "../views/nav/footer.php"; ?>
     </section>
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
