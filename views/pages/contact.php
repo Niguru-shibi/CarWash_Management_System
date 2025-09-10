@@ -255,6 +255,27 @@
             <label for="email">Your Email</label>
           </div>
 
+          <div class="mb-3">
+            <label for="location" class="form-label">Preferred Branch</label>
+            <select class="form-control" id="location" required>
+              <option value="" disabled selected>Select Location</option>
+              <option value="branch1">Downtown Branch</option>
+              <option value="branch2">Uptown Branch</option>
+              <option value="branch3">Eastside Branch</option>
+            </select>
+          </div>
+
+          <!-- Dropdown for Packages -->
+          <div class="mb-3">
+            <label for="package" class="form-label">Service Package</label>
+            <select class="form-control" id="package" required>
+              <option value="" disabled selected>Select Washing Plan</option>
+              <option value="basic">Basic Wash</option>
+              <option value="premium">Premium Wash</option>
+              <option value="ultimate">Ultimate Shine</option>
+            </select>
+          </div>
+
           <div class="form-group">
             <i class="fas fa-comment-dots"></i>
             <textarea id="message" rows="4" placeholder=" " required></textarea>

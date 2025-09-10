@@ -4,6 +4,7 @@
 	
 		//database variables
 		private $servername = "localhost";
+		private $db_name = "car_wash_db";
 		private $username = "root";
 		private $password = "";
 		

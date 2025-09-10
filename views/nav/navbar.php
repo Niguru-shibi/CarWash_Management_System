@@ -191,9 +191,9 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#washingplan">Washing Plan</a></li>
       <li><a href="#washingpoint">Washing Point</a></li>
-      <li><a href="#" class="cta-btn">Book Now</a></li>
+      <li><a href="#washingplan" class="cta-btn">Book Now</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="../views/pages/login.php" class="login-btn">Login</a></li>
+      <li><a href="../route/route.php?page=admin_login" class="login-btn">Login</a></li>
     </ul>
 
     <!-- Hamburger -->

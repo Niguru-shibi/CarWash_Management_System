@@ -1,5 +1,4 @@
 <?php
     // Start the session
     session_start();
-    header("Location: page/home.php");
-?>
+     header("Location: route/route.php");
