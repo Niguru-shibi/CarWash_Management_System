@@ -92,20 +92,20 @@
 
   <div class="login-container">
     <h2>Admin Login</h2>
-    <form>
+    <form action="../controller/authenticate.php?function=admin_login" method="POST" autocomplete="off">
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+        <input type="text" class="form-control" id="username" name="adminUsername" placeholder="Enter your username" required>
       </div>
 
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+        <input type="password" class="form-control" id="password" name="adminPassword" placeholder="Enter your password" required>
       </div>
 
       <button type="submit" class="btn-login">Login</button>
     <div class="form-text">
-      <a href="../view_page.php">Back to Home</a>
+      <a href="../route/route.php">Back to Home</a>
     </div>
   </div>
 

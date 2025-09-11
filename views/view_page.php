@@ -7,7 +7,7 @@
     <title>Car Wash Management System</title>
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Animate On Scroll Library */ -->
+    <!-- Animate On Scroll Library -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 
@@ -16,6 +16,7 @@
         <?php include "pages/home.php"; ?>
     </section>
 
+    <!-- ✅ REMOVE the section wrapper here -->
     <?php include "../views/nav/navbar.php"; ?>
 
     <section id="about">
@@ -24,10 +25,9 @@
 
     <section id="services">
         <?php include "pages/services.php"; ?>
-
         <?php include "pages/offer.php"; ?>
     </section>
-    
+
     <section id="washingplan">
         <?php include "pages/washingplan.php"; ?>
     </section>
@@ -40,9 +40,8 @@
         <?php include "pages/contact.php"; ?>
     </section>
 
-    <section>
-        <?php include "../views/nav/footer.php"; ?>
-    </section>
+    <!-- ✅ REMOVE the section wrapper here -->
+    <?php include "../views/nav/footer.php"; ?>
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -54,13 +53,10 @@
             once: true,
         });
 
-        // Refresh AOS once everything is ready
         window.addEventListener("load", () => {
             AOS.refresh();
         });
     </script>
-
-
 </body>
 
 </html>

@@ -26,8 +26,8 @@
                 $stored_hash = $admin_list[0]['admin_password']; // Match the exact DB field
         
                 if (password_verify($adminPassword, $stored_hash)) {
-                    $_SESSION['admin_id'] = $admin_list[0]['id'];
-                    header("Location: ../views/admin_pages/admin_dashboard.php");
+                    $_SESSION['admin_id'] = $admin_list[0]['admin_id'];
+                    header("Location: ../views/dashboard/admin_dashboard.php");
                     exit();
                 } else {
                     // Incorrect password
