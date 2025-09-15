@@ -27,7 +27,7 @@
         
                 if (password_verify($adminPassword, $stored_hash)) {
                     $_SESSION['admin_id'] = $admin_list[0]['admin_id'];
-                    header("Location: ../views/dashboard/admin_dashboard.php");
+                    header("Location: ../views/admin_views.php");
                     exit();
                 } else {
                     // Incorrect password

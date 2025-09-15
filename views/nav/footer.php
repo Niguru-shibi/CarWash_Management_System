@@ -11,6 +11,7 @@
   padding: 4rem 2rem 1rem;
   margin-top: 3rem;
   font-family: 'Segoe UI', sans-serif;
+  margin-bottom: -20rem;
 }
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }

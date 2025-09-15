@@ -18,23 +18,10 @@
       font-family: 'Quicksand', sans-serif;
       background: linear-gradient(135deg, #0a192f, #001f54);
       color: #fff;
+      
     }
 
-    /* Navbar */
-    nav {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: linear-gradient(to right, #0ea5e9, #1d4ed8, #0ea5e9);
-      backdrop-filter: blur(20px);
-      padding: 1.2rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 10px 30px rgba(0, 180, 255, 0.25);
-      z-index: 20;
-    }
+    
 
     .logo {
       font-size: 1.9rem;
@@ -123,6 +110,7 @@
     .carousel-item {
       height: 90vh;
       width: 100%;
+      margin-top: -40px;
     }
 
     .carousel-item img {
@@ -213,7 +201,7 @@
       }
     }
   </style>
-  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
+ 
 </head>
 
 <body>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AutoShine Carwash</title>
+  <title>UrbanShine Carwash</title>
 
   <!-- Bootstrap & Icons -->
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -48,10 +48,10 @@
 
 <body>
   <!-- Include Admin Sidebar -->
-  <?php include 'nav/admin_sidebar.php'; ?>
+  <?php include 'nav/client_sidebar.php'; ?>
 
   <!-- Include Admin Navbar -->
-  <?php include 'nav/admin_navbar.php'; ?>
+  <?php include 'nav/client_navbar.php'; ?>
 
   <!-- Main Content -->
   <main class="main-content" id="mainContent">
@@ -93,10 +93,9 @@
       });
 
       // Load the dashboard page by default
-      loadPage("dashboard/admin_dashboard.php");
+      loadPage("client_dashboard/client_profile.php");
     });
   </script>
-  
 
   <!-- End AJax Script -->
 
