@@ -8,7 +8,7 @@ $(function () {
         $('#message').empty();
 
         $.ajax({
-            url: '../../CarWashManagementSystem/controller/authenticate.php',
+            url: '../../CarWash_Management_System/controller/authenticate.php',
             type: 'post',
             data: $(this).serialize(),
             dataType: 'json',
