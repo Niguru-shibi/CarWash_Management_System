@@ -22,7 +22,8 @@
         border: 1px solid #0ff;
         padding: 35px 30px;
         border-radius: 14px;
-        max-width: 420px; /* Fixed width, not full */
+        max-width: 420px;
+        /* Fixed width, not full */
         width: 90%;
         position: relative;
         animation: fadeInUp 0.4s ease;
@@ -31,8 +32,15 @@
     }
 
     @keyframes fadeInUp {
-        from { transform: translateY(30px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
+        from {
+            transform: translateY(30px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
 
     /* Close Button */
@@ -45,6 +53,7 @@
         color: #0ff;
         transition: 0.3s;
     }
+
     .close:hover {
         color: #00c9c9;
         transform: scale(1.2);
@@ -102,8 +111,8 @@
         padding: 0 5px;
     }
 
-    .form-group input:focus + label,
-    .form-group input:not(:placeholder-shown) + label {
+    .form-group input:focus+label,
+    .form-group input:not(:placeholder-shown)+label {
         top: -8px;
         left: 10px;
         font-size: 0.75rem;
@@ -122,6 +131,7 @@
         cursor: pointer;
         transition: 0.3s;
     }
+
     .btn-submit:hover {
         background: #00c9c9;
         transform: scale(1.03);
@@ -137,6 +147,7 @@
         cursor: pointer;
         transition: 0.3s;
     }
+
     .register-link:hover {
         text-decoration: underline;
         color: #00c9c9;
@@ -164,7 +175,7 @@
         <div id="message"></div>
 
         <!-- Login Form -->
-        <form action="../controller/authenticate.php?function=client_login" method="POST" autocomplete="off">
+        <form id="clientLoginModal" action="../controller/authenticate.php?function=client_login" method="POST" autocomplete="off">
             <div class="form-group">
                 <input type="email" id="clientEmail" name="clientEmail" placeholder=" " required>
                 <label for="clientEmail">Email</label>
@@ -178,26 +189,27 @@
         </form>
 
         <!-- Register Form -->
-        <form id="clientRegisterModal" style="display: none;">
+        <form id="clientRegisterModal" action="../controller/authenticate.php?function=client_register" method="POST" style="display: none;">
             <div class="form-group">
-                <input type="text" id="username" placeholder=" " required>
+                <input type="text" id="username" name="clientUsername" placeholder=" " required>
                 <label for="username">Username</label>
             </div>
             <div class="form-group">
-                <input type="email" id="email" placeholder=" " required>
+                <input type="email" id="email" name="clientEmail" placeholder=" " required>
                 <label for="email">Email</label>
             </div>
             <div class="form-group">
-                <input type="password" id="passwordReg" placeholder=" " required>
+                <input type="password" id="passwordReg" name="clientPassword" placeholder=" " required>
                 <label for="passwordReg">Password</label>
             </div>
             <div class="form-group">
-                <input type="password" id="conPasswordReg" placeholder=" " required>
+                <input type="password" id="conPasswordReg" name="confirmPassword" placeholder=" " required>
                 <label for="conPasswordReg">Confirm Password</label>
             </div>
             <button type="submit" class="btn-submit">Register</button>
             <span class="register-link" id="backToLogin">Already have an account? Login</span>
         </form>
+
     </div>
 </div>
 
@@ -240,3 +252,4 @@
         });
     });
 </script>
+ <script src="../assets/js/bootstrap.bundle.min.js"></script>

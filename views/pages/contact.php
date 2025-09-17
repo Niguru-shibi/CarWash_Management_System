@@ -10,7 +10,6 @@
     padding: 5rem 0;
   }
 
-  /* Gradient Animation (same for all sections) */
   @keyframes gradientBG {
     0% {
       background-position: 0% 50%;
@@ -124,6 +123,14 @@
     background: rgba(255, 255, 255, 0.9);
     color: #333;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  /* Glowing border on focus */
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border: 2px solid #0d6efd;
+    box-shadow: 0 0 12px rgba(13, 110, 253, 0.7);
   }
 
   .form-group i {
@@ -139,27 +146,27 @@
     resize: none;
   }
 
+  /* Label styles */
   .form-group label {
     position: absolute;
-    top: 14px;
-    left: 44px;
-    color: #777;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    pointer-events: none;
-  }
-
-  .form-group input:focus+label,
-  .form-group input:not(:placeholder-shown)+label,
-  .form-group textarea:focus+label,
-  .form-group textarea:not(:placeholder-shown)+label {
     top: -10px;
     left: 40px;
-    font-size: 0.75rem;
-    background: #fff;
-    padding: 0 6px;
+    font-size: 0.85rem;
+    background: #0a192f;
+    /* ✅ matches theme */
+    color: #ccc;
+    padding: 0 8px;
     border-radius: 6px;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: none;
+  }
+
+  /* When active, glow like input */
+  .form-group input:focus+label,
+  .form-group textarea:focus+label {
     color: #0d6efd;
+    box-shadow: 0 0 8px rgba(13, 110, 253, 0.7);
   }
 
   /* Button */
@@ -181,7 +188,37 @@
     transform: scale(1.05);
   }
 
-  /* Google Map */
+  .contact-form button:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Popup */
+  .popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #28a745;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.4s ease;
+    z-index: 9999;
+  }
+
+  .popup.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .popup.error {
+    background: #dc3545;
+  }
+
+  /* Map */
   .map-container {
     margin-top: 2rem;
     border-radius: 15px;
@@ -195,7 +232,6 @@
     border: 0;
   }
 
-  /* Responsive */
   @media (max-width: 950px) {
     .contact-container {
       grid-template-columns: 1fr;
@@ -207,10 +243,8 @@
     }
   }
 </style>
-</head>
 
 <body>
-
   <!-- Contact Section -->
   <section class="contact-section">
     <div class="contact-container">
@@ -225,64 +259,83 @@
         <div class="contact-item"><i class="fas fa-map-marker-alt"></i> 123 Car Wash St, Auto City</div>
 
         <!-- Map -->
-        <div class="map-container" style="width:100%; max-width:1200px; height:400px; margin:0 auto; border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.3);">
+        <div class="map-container">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.341231792918!2d125.00274!3d11.177622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b4e8c3a45b5b61%3A0x123456789abcdef0!2sLeyte%20Academic%20Center%20Compound%2C%20Pawing%2C%20Palo%2C%20Leyte%2C%20Philippines!5e0!3m2!1sen!2sph!4v0000000000000"
-            width="100%" height="100%" style="border:0; display:block;" allowfullscreen="" loading="lazy">
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3926.440979688939!2d124.99877637578838!3d11.16092218901506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33085f6d1a0e52c7%3A0xddd3560a6b2a8414!2sLeyte%20Academic%20Center!5e0!3m2!1sen!2sph!4v1737173064000!5m2!1sen!2sph"
+            width="100%"
+            height="250"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
           </iframe>
         </div>
-      </div>
 
+      </div>
 
       <!-- Right Form -->
       <div class="contact-form">
-        <form>
+        <form id="contactForm">
           <div class="form-group">
             <i class="fas fa-user"></i>
-            <input type="text" id="name" placeholder=" " required>
+            <input type="text" id="name" placeholder=" Name" required>
             <label for="name">Your Name</label>
           </div>
 
           <div class="form-group">
             <i class="fas fa-envelope"></i>
-            <input type="email" id="email" placeholder=" " required>
+            <input type="email" id="email" placeholder=" Email" required>
             <label for="email">Your Email</label>
           </div>
 
-          <div class="mb-3">
-            <label for="location" class="form-label">Preferred Branch</label>
-            <select class="form-control" id="location" required>
-              <option value="" disabled selected>Select Location</option>
-              <option value="branch1">Downtown Branch</option>
-              <option value="branch2">Uptown Branch</option>
-              <option value="branch3">Eastside Branch</option>
-            </select>
+          <div class="form-group">
+            <i class="fas fa-mobile-alt"></i>
+            <input type="text" id="contact" placeholder=" Contact No./Facebook" required>
+            <label for="contact">Your Contact No./ Contact Info</label>
           </div>
 
-          <!-- Dropdown for Packages -->
-          <div class="mb-3">
-            <label for="package" class="form-label">Service Package</label>
-            <select class="form-control" id="package" required>
-              <option value="" disabled selected>Select Washing Plan</option>
-              <option value="basic">Basic Wash</option>
-              <option value="premium">Premium Wash</option>
-              <option value="ultimate">Ultimate Shine</option>
-            </select>
+          <div class="form-group">
+            <i class="fas fa-map-marker-alt"></i>
+            <input type="text" id="address" placeholder=" Address" required>
+            <label for="address">Your Address</label>
           </div>
 
           <div class="form-group">
             <i class="fas fa-comment-dots"></i>
-            <textarea id="message" rows="4" placeholder=" " required></textarea>
+            <textarea id="message" rows="4" placeholder=" Message" required></textarea>
             <label for="message">Your Message</label>
           </div>
 
           <button type="submit">Send Message</button>
         </form>
       </div>
-
     </div>
   </section>
 
-</body>
+  <!-- Popup -->
+  <div id="popup" class="popup"></div>
 
-</html>
+  <script>
+    const form = document.getElementById("contactForm");
+    const popup = document.getElementById("popup");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const success = true; // simulate backend
+
+      if (success) {
+        popup.textContent = "Message sent successfully!";
+        popup.className = "popup show";
+      } else {
+        popup.textContent = "Error sending message. Try again!";
+        popup.className = "popup show error";
+      }
+
+      setTimeout(() => {
+        popup.className = "popup";
+      }, 3000);
+      form.reset();
+    });
+  </script>
+</body>
