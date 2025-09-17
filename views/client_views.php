@@ -16,8 +16,9 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
-  <!-- jQuery CDN (must be before this script) -->
-  <script src="../assets/js/jquery.js"></script>
+  <!-- Load jQuery first -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
   <style>
@@ -98,6 +99,7 @@
   </script>
 
   <!-- End AJax Script -->
+
 
   <!-- Bootstra 5 Scripts -->
   <script src="../assets/js/bootstrap.bundle.min.js"></script>

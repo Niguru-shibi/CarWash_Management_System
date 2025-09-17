@@ -158,7 +158,8 @@
         </ul>
       </div>
       <div class="price-footer">
-        <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
+       <button class="btn btn-primary openModal">Book Now</button>
+        <?php include 'client_modal.php'; ?>
       </div>
     </div>
   </div>
@@ -180,7 +181,8 @@
         </ul>
       </div>
       <div class="price-footer">
-        <a class="btn" data-toggle="modal" data-target="#myModal">Book Now</a>
+        <button class="btn btn-primary openModal">Book Now</button>
+        <?php include 'client_modal.php'; ?>
       </div>
     </div>
   </div>
@@ -202,8 +204,8 @@
         </ul>
       </div>
       <div class="price-footer">
-        <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
-      </div>
+        <button class="btn btn-primary openModal">Book Now</button>
+        <?php include 'client_modal.php'; ?>
     </div>
   </div>
 

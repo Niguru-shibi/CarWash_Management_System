@@ -164,7 +164,7 @@
         <div id="message"></div>
 
         <!-- Login Form -->
-        <form id="clientLoginModal">
+        <form action="../controller/authenticate.php?function=client_login" method="POST" autocomplete="off">
             <div class="form-group">
                 <input type="email" id="clientEmail" name="clientEmail" placeholder=" " required>
                 <label for="clientEmail">Email</label>
@@ -201,7 +201,7 @@
     </div>
 </div>
 
-<script src="../../CarWash_ManagementSystem/assets/js/client_login.js"></script>
+<script src="../../CarWash_Management_System/assets/js/client_login.js"></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {

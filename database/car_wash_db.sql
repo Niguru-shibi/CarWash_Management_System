@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2025 at 07:51 AM
+-- Generation Time: Sep 17, 2025 at 08:32 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `car_wash_db`
 --
+CREATE DATABASE IF NOT EXISTS `car_wash_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `car_wash_db`;
 
 -- --------------------------------------------------------
 
@@ -54,20 +56,7 @@ CREATE TABLE `admin_tb` (
 --
 
 INSERT INTO `admin_tb` (`admin_id`, `admin_username`, `admin_password`, `admin_date`) VALUES
-(1, 'admin', 'admin', '2025-09-10 13:22:14');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `baranggay_tb`
---
-
-CREATE TABLE `baranggay_tb` (
-  `baranggay_id` int(11) NOT NULL,
-  `munCity_id` int(11) NOT NULL,
-  `baranggay_name` varchar(100) NOT NULL,
-  `baranggay_date` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(1, 'admin', '$2y$10$7oRXZjoN8jsiC0OYmoejRuZk89XJ03Pry4jHP4b7exaRGnP09CSf6', '2025-09-10 13:22:14');
 
 -- --------------------------------------------------------
 
@@ -109,12 +98,22 @@ CREATE TABLE `branch_tb` (
 
 CREATE TABLE `client_tb` (
   `client_id` int(11) NOT NULL,
-  `zoneStreet_id` int(11) NOT NULL,
-  `client_name` int(255) NOT NULL,
-  `client_email` int(255) NOT NULL,
-  `client_ph_no` bigint(11) NOT NULL,
-  `client_date` int(11) NOT NULL DEFAULT current_timestamp()
+  `client_username` varchar(255) NOT NULL,
+  `client_fname` varchar(100) NOT NULL,
+  `client_lname` varchar(100) NOT NULL,
+  `client_phone` varchar(15) NOT NULL,
+  `client_address` varchar(500) NOT NULL,
+  `client_email` varchar(255) NOT NULL,
+  `client_password` varchar(100) NOT NULL,
+  `client_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `client_tb`
+--
+
+INSERT INTO `client_tb` (`client_id`, `client_username`, `client_fname`, `client_lname`, `client_phone`, `client_address`, `client_email`, `client_password`, `client_date`) VALUES
+(3, 'John', '', '', '', '', 'sample@gmail.com', '$2y$10$sl9ihmpgsXbGJlX1P40CjOXwEQktAXdpGa1ktnSPN8.MzCLAq08Nm', '2025-09-17 13:14:08');
 
 -- --------------------------------------------------------
 
@@ -159,20 +158,6 @@ CREATE TABLE `home_crsl_tb` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `muncity_tb`
---
-
-CREATE TABLE `muncity_tb` (
-  `munCity_id` int(11) NOT NULL,
-  `province_id` int(11) NOT NULL,
-  `munCity_name` varchar(100) NOT NULL,
-  `munCity_zipcode` int(4) NOT NULL,
-  `munCity_date` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `offer_tb`
 --
 
@@ -198,31 +183,6 @@ CREATE TABLE `payment_tb` (
   `payment_method` varchar(500) NOT NULL,
   `payment_status` enum('Pending','Done') NOT NULL,
   `payment_date` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `province_tb`
---
-
-CREATE TABLE `province_tb` (
-  `province_id` int(11) NOT NULL,
-  `region_id` int(11) NOT NULL,
-  `province_name` varchar(100) NOT NULL,
-  `province_date` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `region_tb`
---
-
-CREATE TABLE `region_tb` (
-  `region_id` int(11) NOT NULL,
-  `region_name` varchar(100) NOT NULL,
-  `region_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -297,19 +257,6 @@ CREATE TABLE `washpoint_tb` (
   `washpoint_date` int(11) NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `zonestreet_tb`
---
-
-CREATE TABLE `zonestreet_tb` (
-  `zoneStreet_id` int(11) NOT NULL,
-  `baranggay_id` int(11) NOT NULL,
-  `zoneStreet_name` varchar(100) NOT NULL,
-  `zoneStreet_date` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Indexes for dumped tables
 --
@@ -325,13 +272,6 @@ ALTER TABLE `about_tb`
 --
 ALTER TABLE `admin_tb`
   ADD PRIMARY KEY (`admin_id`);
-
---
--- Indexes for table `baranggay_tb`
---
-ALTER TABLE `baranggay_tb`
-  ADD PRIMARY KEY (`baranggay_id`),
-  ADD KEY `munCity_id_fk` (`munCity_id`);
 
 --
 -- Indexes for table `booking_tb`
@@ -355,8 +295,7 @@ ALTER TABLE `branch_tb`
 -- Indexes for table `client_tb`
 --
 ALTER TABLE `client_tb`
-  ADD PRIMARY KEY (`client_id`),
-  ADD KEY `region_id_fk` (`zoneStreet_id`);
+  ADD PRIMARY KEY (`client_id`);
 
 --
 -- Indexes for table `feedback_tb`
@@ -378,13 +317,6 @@ ALTER TABLE `home_crsl_tb`
   ADD PRIMARY KEY (`crsl_id`);
 
 --
--- Indexes for table `muncity_tb`
---
-ALTER TABLE `muncity_tb`
-  ADD PRIMARY KEY (`munCity_id`),
-  ADD KEY `province_id_fk` (`province_id`);
-
---
 -- Indexes for table `offer_tb`
 --
 ALTER TABLE `offer_tb`
@@ -396,19 +328,6 @@ ALTER TABLE `offer_tb`
 ALTER TABLE `payment_tb`
   ADD PRIMARY KEY (`payment_id`),
   ADD KEY `booking_id_fk` (`booking_id`);
-
---
--- Indexes for table `province_tb`
---
-ALTER TABLE `province_tb`
-  ADD PRIMARY KEY (`province_id`),
-  ADD KEY `region_id_fk` (`region_id`);
-
---
--- Indexes for table `region_tb`
---
-ALTER TABLE `region_tb`
-  ADD PRIMARY KEY (`region_id`);
 
 --
 -- Indexes for table `room_tb`
@@ -436,13 +355,6 @@ ALTER TABLE `washpoint_tb`
   ADD PRIMARY KEY (`washpoint_id`);
 
 --
--- Indexes for table `zonestreet_tb`
---
-ALTER TABLE `zonestreet_tb`
-  ADD PRIMARY KEY (`zoneStreet_id`),
-  ADD KEY `baranggay_id_fk` (`baranggay_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -457,12 +369,6 @@ ALTER TABLE `about_tb`
 --
 ALTER TABLE `admin_tb`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `baranggay_tb`
---
-ALTER TABLE `baranggay_tb`
-  MODIFY `baranggay_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `booking_tb`
@@ -480,7 +386,7 @@ ALTER TABLE `branch_tb`
 -- AUTO_INCREMENT for table `client_tb`
 --
 ALTER TABLE `client_tb`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `feedback_tb`
@@ -501,12 +407,6 @@ ALTER TABLE `home_crsl_tb`
   MODIFY `crsl_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `muncity_tb`
---
-ALTER TABLE `muncity_tb`
-  MODIFY `munCity_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `offer_tb`
 --
 ALTER TABLE `offer_tb`
@@ -517,18 +417,6 @@ ALTER TABLE `offer_tb`
 --
 ALTER TABLE `payment_tb`
   MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `province_tb`
---
-ALTER TABLE `province_tb`
-  MODIFY `province_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `region_tb`
---
-ALTER TABLE `region_tb`
-  MODIFY `region_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `room_tb`
@@ -555,20 +443,8 @@ ALTER TABLE `washpoint_tb`
   MODIFY `washpoint_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `zonestreet_tb`
---
-ALTER TABLE `zonestreet_tb`
-  MODIFY `zoneStreet_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `baranggay_tb`
---
-ALTER TABLE `baranggay_tb`
-  ADD CONSTRAINT `baranggay_tb_ibfk_1` FOREIGN KEY (`munCity_id`) REFERENCES `muncity_tb` (`munCity_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `booking_tb`
@@ -581,28 +457,10 @@ ALTER TABLE `booking_tb`
   ADD CONSTRAINT `booking_tb_ibfk_5` FOREIGN KEY (`room_id`) REFERENCES `room_tb` (`room_id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `branch_tb`
---
-ALTER TABLE `branch_tb`
-  ADD CONSTRAINT `branch_tb_ibfk_1` FOREIGN KEY (`zoneStreet_id`) REFERENCES `zonestreet_tb` (`zoneStreet_id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `client_tb`
---
-ALTER TABLE `client_tb`
-  ADD CONSTRAINT `client_tb_ibfk_1` FOREIGN KEY (`zoneStreet_id`) REFERENCES `zonestreet_tb` (`zoneStreet_id`) ON UPDATE CASCADE;
-
---
 -- Constraints for table `feedback_tb`
 --
 ALTER TABLE `feedback_tb`
   ADD CONSTRAINT `feedback_tb_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `booking_tb` (`booking_id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `muncity_tb`
---
-ALTER TABLE `muncity_tb`
-  ADD CONSTRAINT `muncity_tb_ibfk_1` FOREIGN KEY (`province_id`) REFERENCES `province_tb` (`province_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payment_tb`
@@ -611,22 +469,10 @@ ALTER TABLE `payment_tb`
   ADD CONSTRAINT `payment_tb_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `booking_tb` (`booking_id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `province_tb`
---
-ALTER TABLE `province_tb`
-  ADD CONSTRAINT `province_tb_ibfk_1` FOREIGN KEY (`region_id`) REFERENCES `region_tb` (`region_id`) ON UPDATE CASCADE;
-
---
 -- Constraints for table `vehicle_tb`
 --
 ALTER TABLE `vehicle_tb`
   ADD CONSTRAINT `vehicle_tb_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `client_tb` (`client_id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `zonestreet_tb`
---
-ALTER TABLE `zonestreet_tb`
-  ADD CONSTRAINT `zonestreet_tb_ibfk_1` FOREIGN KEY (`baranggay_id`) REFERENCES `baranggay_tb` (`baranggay_id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

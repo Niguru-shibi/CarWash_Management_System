@@ -4,7 +4,6 @@ $(function () {
 
         // disable button properly
         $('#adminLoginBtn').prop('disabled', true).text("Please wait...");
-
         $('#message').empty();
 
         $.ajax({
