@@ -175,7 +175,7 @@
         <div id="message"></div>
 
         <!-- Login Form -->
-        <form id="clientLoginModal" action="../controller/authenticate.php?function=client_login" method="POST" autocomplete="off">
+        <form id="clientLoginModal" method="POST" autocomplete="off">
             <div class="form-group">
                 <input type="email" id="clientEmail" name="clientEmail" placeholder=" " required>
                 <label for="clientEmail">Email</label>
@@ -187,6 +187,67 @@
             <button type="submit" class="btn-submit" id="clientLoginBtn">Login</button>
             <span class="register-link" id="showRegister">New? Register here</span>
         </form>
+        <div id="message"></div> <!-- container for success/error messages -->
+
+        <script>
+
+             $(document).on('submit', '#clientLoginModal', function (e) {
+    e.preventDefault();
+
+    let $btn = $('#clientLoginBtn');
+    let $form = $(this);
+    let $message = $('#message');
+
+    $btn.prop('disabled', true).text("Please wait...");
+    $message.empty();
+
+    $.ajax({
+        url: '../../../CarWash_Management_System/controller/authenticate.php',
+        type: 'POST',
+        data: $form.serialize(),
+        dataType: 'json',
+
+        success: function (res) {
+            if (res.status === 'success') {
+                $message.html(`
+                    <div class="cardclient border-success shadow-sm mb-2" 
+                         style="max-width: 320px; margin:auto; border:1px solid #0f0; color:#0f0;">
+                        <div class="card-body text-center">
+                            <small><strong>✔ Success:</strong> ${res.message}</small>
+                        </div>
+                    </div>
+                `);
+                setTimeout(() => {
+                    window.location.href = '../client_views.php';
+                }, 1500);
+            } else {
+                $message.html(`
+                    <div class="cardclient border-danger shadow-sm mb-2" 
+                         style="max-width: 320px; margin:auto; border:1px solid #f00; color:#f00;">
+                        <div class="card-body text-center">
+                            <small><strong>✖ Error:</strong> ${res.message}</small>
+                        </div>
+                    </div>
+                `);
+                $btn.prop('disabled', false).text('Login as Client');
+            }
+        },
+
+        error: function (xhr, status, error) {
+            console.error("AJAX Error:", status, error);
+            $message.html(`
+                <div class="cardclient border-warning shadow-sm mb-2" style="max-width: 320px; margin:auto;">
+                    <div class="card-body p-2 text-warning text-center">
+                        <small><strong>⚠ Server Error:</strong> Please try again later.</small>
+                    </div>
+                </div>
+            `);
+            $btn.prop('disabled', false).text('Login as Client');
+        }
+    });
+});
+        </script>
+       
 
         <!-- Register Form -->
         <form id="clientRegisterModal" action="../controller/authenticate.php?function=client_register" method="POST" style="display: none;">
@@ -252,4 +313,4 @@
         });
     });
 </script>
- <script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>

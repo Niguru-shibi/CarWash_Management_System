@@ -1,104 +1,91 @@
 <?php
+session_start();
+
 // Import database models
 require_once __DIR__ . '/../model/Admin.php';
 require_once __DIR__ . '/../model/Client.php';
 
-class Authenticate {
-    private $client; // ✅ Declare client property
+header('Content-Type: application/json');
 
-    public function __construct() {
-        $this->client = new Client(); // ✅ Initialize Client once
-    }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Admin Login
-    public function admin_login() {
-        $adminUsername = $_POST['adminUsername'] ?? '';
-        $adminPassword = $_POST['adminPassword'] ?? '';
+    // ✅ Admin login
+    if (isset($_POST['adminUsername'], $_POST['adminPassword'])) {
+        $adminUsername = $_POST['adminUsername'];
+        $adminPassword = $_POST['adminPassword'];
 
-        $admin = new Admin();
-        $admin_list = $admin->getAdminByUsername($adminUsername);
+        $adminModel = new AdminLogin();
+        $admin = $adminModel->getAdminByUsername($adminUsername);
 
-        if (count($admin_list) > 0) {
-            $stored_hash = $admin_list[0]['admin_password'];
-
-            if (password_verify($adminPassword, $stored_hash)) {
-                session_start();
-                $_SESSION['admin_id'] = $admin_list[0]['admin_id'];
-                header("Location: ../views/admin_views.php");
-                exit();
-            } else {
-                header("Location: ../index.php?login=failed");
-                exit();
-            }
+        if ($admin && password_verify($adminPassword, $admin['admin_password'])) {
+            $_SESSION['admin_username'] = $admin['admin_username'];
+            echo json_encode(["status" => "success", "message" => "Admin login successful!"]);
         } else {
-            header("Location: ../index.php?login=failed");
-            exit();
+            echo json_encode(["status" => "error", "message" => "Invalid username or password"]);
         }
+        exit; // stop here so client login doesn’t run
     }
 
-    // Client Login
-    public function client_login() {
-        $clientEmail = $_POST['clientEmail'] ?? '';
-        $clientPassword = $_POST['clientPassword'] ?? '';
+    // ✅ Client login
+    if (isset($_POST['clientEmail'], $_POST['clientPassword'])) {
+        $clientEmail = $_POST['clientEmail'];
+        $clientPassword = $_POST['clientPassword'];
 
-        $client_list = $this->client->getClientByEmail($clientEmail);
+        $clientModel = new ClientLogin();
+        $client = $clientModel->getClientByEmail($clientEmail);
 
-        if (count($client_list) > 0) {
-            $stored_hash = $client_list[0]['client_password'];
-
-            if (password_verify($clientPassword, $stored_hash)) {
-                session_start();
-                $_SESSION['client_id'] = $client_list[0]['client_id'];
-                header("Location: ../views/client_views.php");
-                exit();
-            } else {
-                header("Location: ../index.php?login=failed");
-                exit();
-            }
+        if ($client && password_verify($clientPassword, $client['client_password'])) {
+            $_SESSION['client_email'] = $client['client_email'];
+            echo json_encode(["status" => "success", "message" => "Client login successful!"]);
         } else {
-            header("Location: ../index.php?login=failed");
-            exit();
+            echo json_encode(["status" => "error", "message" => "Invalid email or password"]);
         }
+        exit;
     }
 
-    // Client Register
-    public function client_register() {
-        if (isset($_POST['clientUsername'], $_POST['clientEmail'], $_POST['clientPassword'], $_POST['confirmPassword'])) {
-            $username = $_POST['clientUsername'];
-            $email = $_POST['clientEmail'];
-            $password = $_POST['clientPassword'];
-            $confirmPassword = $_POST['confirmPassword'];
+   // ✅ Client Register
+// ✅ Client Register
+if (isset($_POST['clientRegEmail'], $_POST['clientRegPassword'], $_POST['clientRegConPassword'], $_POST['clientRegUsername'])) {
 
-            if ($password !== $confirmPassword) {
-                header("Location: ../index.php?register=password_mismatch");
-                exit();
-            }
+    $clientUsername    = $_POST['clientRegUsername'];
+    $clientEmail       = $_POST['clientRegEmail'];
+    $clientPassword    = $_POST['clientRegPassword'];
+    $clientConPassword = $_POST['clientRegConPassword'];
 
-            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    $clientModel = new ClientLogin();
 
-            // ✅ Use $this->client (now initialized in __construct)
-            $result = $this->client->createClient($username, $email, $hashedPassword);
-
-            if ($result) {
-                header("Location: ../index.php?register=success");
-                exit();
-            } else {
-                header("Location: ../index.php?register=failed");
-                exit();
-            }
-        }
+    // 🔑 Check if email already exists
+    $existingClient = $clientModel->getClientByEmail($clientEmail);
+    if ($existingClient) {
+        echo json_encode(["status" => "error", "message" => "Email already registered"]);
+        exit;
     }
+
+    // 🔑 Check if passwords match
+    if ($clientPassword !== $clientConPassword) {
+        echo json_encode(["status" => "error", "message" => "Passwords do not match"]);
+        exit;
+    }
+
+    // 🔑 Hash the password
+    $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+
+    // 🔑 Insert client
+    $inserted = $clientModel->registerClient($clientUsername, $clientEmail, $hashedPassword);
+
+    if ($inserted) {
+        $_SESSION['client_email'] = $clientEmail;
+        echo json_encode(["status" => "success", "message" => "Client registered successfully!"]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Registration failed. Try again."]);
+    }
+
+    exit;
 }
 
-// ✅ Router
-if (isset($_GET['function'])) {
-    $function = $_GET['function'];
 
-    $authenticate = new Authenticate();
 
-    if (method_exists($authenticate, $function)) {
-        $authenticate->{$function}();
-    } else {
-        die("Function not found.");
-    }
+
+    // ✅ If neither set → invalid request
+    echo json_encode(["status" => "error", "message" => "Invalid request"]);
 }

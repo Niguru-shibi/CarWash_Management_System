@@ -2,32 +2,39 @@
 // import database connection
 require_once 'config/connect_db.php';
 
-class Client extends Connector {
+class ClientLogin extends Connector {
     public function __construct() {
         parent::__construct();
     }
 
-    // ✅ Get client by email
+   
+    // ✅ Get a single client by email (for login)
     public function getClientByEmail($clientEmail) {
-        $sql = "SELECT * FROM client_tb WHERE client_email = :client_email";
+        $sql = "SELECT * FROM client_tb WHERE client_email = ?";
         $query = $this->conn->prepare($sql);
 
-        $query->bindParam(':client_email', $clientEmail);
-        $query->execute(); // run the query
+        if (!$query) {
+            die("Query preparation failed: " . $this->conn->error);
+        }
 
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        $query->bind_param("s", $clientEmail);
+        $query->execute();
+
+        $result = $query->get_result();
+
+        // ✅ return just one row (assoc) instead of all rows
+        return $result->fetch_assoc();
     }
 
+
     // ✅ Create new client (registration)
-    public function createClient($username, $email, $password) {
+    public function registerClient($username, $email, $password) {
         try {
             $sql = "INSERT INTO client_tb (client_username, client_email, client_password) 
-                    VALUES (:username, :email, :password)";
+                    VALUES (?, ?, ?)";
             $query = $this->conn->prepare($sql);
 
-            $query->bindParam(':username', $username);
-            $query->bindParam(':email', $email);
-            $query->bindParam(':password', $password);
+            $query->bind_param("sss", $username, $email, $password);
 
             return $query->execute(); // true if success
         } catch (PDOException $e) {
