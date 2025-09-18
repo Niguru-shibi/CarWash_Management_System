@@ -7,7 +7,6 @@ class ClientLogin extends Connector {
         parent::__construct();
     }
 
-   
     // ✅ Get a single client by email (for login)
     public function getClientByEmail($clientEmail) {
         $sql = "SELECT * FROM client_tb WHERE client_email = ?";
@@ -22,10 +21,8 @@ class ClientLogin extends Connector {
 
         $result = $query->get_result();
 
-        // ✅ return just one row (assoc) instead of all rows
         return $result->fetch_assoc();
     }
-
 
     // ✅ Create new client (registration)
     public function registerClient($username, $email, $password) {
@@ -36,10 +33,41 @@ class ClientLogin extends Connector {
 
             $query->bind_param("sss", $username, $email, $password);
 
-            return $query->execute(); // true if success
+            return $query->execute();
         } catch (PDOException $e) {
             error_log("❌ Client creation failed: " . $e->getMessage());
             return false;
         }
+    }
+
+    //-- Send contact message --
+    public function sendContact($contactName, $contactEmail, $contactContact, $contactAddress, $contactMessage) {
+        $sql = "INSERT INTO contact_tb (contact_name, contact_email, contact_contact, contact_address, contact_message) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+
+        if (!$stmt) {
+            die("Statement preparation failed: " . $this->conn->error);
+        }
+
+        $stmt->bind_param(
+            "sssss",
+            $contactName,
+            $contactEmail,
+            $contactContact,
+            $contactAddress,
+            $contactMessage
+        );
+
+        return $stmt->execute();
+    }
+
+    //-- Get all contact messages --
+    public function getAllContacts() {
+        $sql = "SELECT * FROM contact_tb ORDER BY contact_date DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }

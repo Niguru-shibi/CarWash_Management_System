@@ -15,7 +15,8 @@ $(function () {
             success: function (res) {
                 if (res.status === 'success') {
                     $('#message').html('<div class="alert success">' + res.message + "</div>");
-                    setTimeout(() => (window.location.href = '../views/admin_views.php'),2000);
+                    // ✅ Correct redirect path
+                    setTimeout(() => (window.location.href = '/Guerrero/CarWash_Management_System/views/admin_views.php'), 2000);
                 } else {
                     $('#message').html('<div class="alert error">' + res.message + "</div>");
                     $('#adminLoginBtn').prop('disabled', false).text('Login as Admin');
@@ -29,4 +30,3 @@ $(function () {
         });
     });
 });
-

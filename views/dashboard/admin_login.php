@@ -90,9 +90,9 @@
 
 <body>
 
-  <div class="login-container">
+ <div class="login-container">
     <h2>Admin Login</h2>
-    <form action="../controller/authenticate.php?function=admin_login" method="POST" autocomplete="off">
+    <form id="adminLoginModal" action="../controller/authenticate.php?function=admin_login" method="POST" autocomplete="off">
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input type="text" class="form-control" id="username" name="adminUsername" placeholder="Enter your username" required>
@@ -103,11 +103,20 @@
         <input type="password" class="form-control" id="password" name="adminPassword" placeholder="Enter your password" required>
       </div>
 
-      <button type="submit" class="btn-login">Login</button>
-    <div class="form-text">
-      <a href="../route/route.php">Back to Home</a>
-    </div>
-  </div>
+      <button type="submit" id="adminLoginBtn" class="btn-login">Login</button>
+      <div class="form-text">
+        <a href="../route/route.php">Back to Home</a>
+      </div>
 
-</body>
-</html>
+      <div id="message"></div>
+    </form>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+<!-- Your custom JS -->
+<script src="../assets/js/admin_login.js"></script>

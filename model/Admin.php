@@ -8,14 +8,13 @@ class AdminLogin extends Connector {
     }
 
     public function getAdminByUsername($adminUsername) {
-        $sql = "SELECT * FROM admin_tb WHERE admin_username = ?";
+        $sql = "SELECT * FROM admin_tb WHERE admin_username = ? LIMIT 1";
         $query = $this->conn->prepare($sql);
 
         $query->bind_param("s", $adminUsername);
-        $query->execute(); //run the query
+        $query->execute();
 
         $result = $query->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
+        return $result->fetch_assoc(); // ✅ returns single row (assoc array) or null
     }
 }

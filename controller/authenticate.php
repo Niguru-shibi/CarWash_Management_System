@@ -7,50 +7,64 @@ require_once __DIR__ . '/../model/Client.php';
 
 header('Content-Type: application/json');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(["status" => "error", "message" => "Invalid request method"]);
+    exit;
+}
 
-    // ✅ Admin login
-    if (isset($_POST['adminUsername'], $_POST['adminPassword'])) {
-        $adminUsername = $_POST['adminUsername'];
-        $adminPassword = $_POST['adminPassword'];
+/**
+ * ---------------- Admin Login ----------------
+ */
+if (isset($_POST['adminUsername'], $_POST['adminPassword'])) {
+    $adminUsername = trim($_POST['adminUsername']);
+    $adminPassword = trim($_POST['adminPassword']);
 
-        $adminModel = new AdminLogin();
-        $admin = $adminModel->getAdminByUsername($adminUsername);
+    $adminModel = new AdminLogin();
+    $admin = $adminModel->getAdminByUsername($adminUsername);
 
-        if ($admin && password_verify($adminPassword, $admin['admin_password'])) {
-            $_SESSION['admin_username'] = $admin['admin_username'];
-            echo json_encode(["status" => "success", "message" => "Admin login successful!"]);
-        } else {
-            echo json_encode(["status" => "error", "message" => "Invalid username or password"]);
-        }
-        exit; // stop here so client login doesn’t run
+    if ($admin && password_verify($adminPassword, $admin['admin_password'])) {
+        $_SESSION['admin_username'] = $admin['admin_username'];
+        echo json_encode(["status" => "success", "message" => "Admin login successful!"]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Invalid username or password"]);
     }
+    exit;
+}
 
-    // ✅ Client login
-    if (isset($_POST['clientEmail'], $_POST['clientPassword'])) {
-        $clientEmail = $_POST['clientEmail'];
-        $clientPassword = $_POST['clientPassword'];
+/**
+ * ---------------- Client Login ----------------
+ */
+if (isset($_POST['clientEmail'], $_POST['clientPassword'])) {
+    $clientEmail = trim($_POST['clientEmail']);
+    $clientPassword = trim($_POST['clientPassword']);
 
-        $clientModel = new ClientLogin();
-        $client = $clientModel->getClientByEmail($clientEmail);
+    $clientModel = new ClientLogin();
+    $client = $clientModel->getClientByEmail($clientEmail);
 
-        if ($client && password_verify($clientPassword, $client['client_password'])) {
-            $_SESSION['client_email'] = $client['client_email'];
-            echo json_encode(["status" => "success", "message" => "Client login successful!"]);
-        } else {
-            echo json_encode(["status" => "error", "message" => "Invalid email or password"]);
-        }
-        exit;
+    if ($client && password_verify($clientPassword, $client['client_password'])) {
+        $_SESSION['client_email'] = $client['client_email'];
+        echo json_encode(["status" => "success", "message" => "Client login successful!"]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Invalid email or password"]);
     }
+    exit;
+}
 
-   // ✅ Client Register
-// ✅ Client Register
-if (isset($_POST['clientRegEmail'], $_POST['clientRegPassword'], $_POST['clientRegConPassword'], $_POST['clientRegUsername'])) {
-
-    $clientUsername    = $_POST['clientRegUsername'];
-    $clientEmail       = $_POST['clientRegEmail'];
-    $clientPassword    = $_POST['clientRegPassword'];
-    $clientConPassword = $_POST['clientRegConPassword'];
+/**
+ * ---------------- Client Register ----------------
+ */
+if (
+    isset(
+        $_POST['clientRegUsername'],
+        $_POST['clientRegEmail'],
+        $_POST['clientRegPassword'],
+        $_POST['clientRegConPassword']
+    )
+) {
+    $clientUsername    = trim($_POST['clientRegUsername']);
+    $clientEmail       = trim($_POST['clientRegEmail']);
+    $clientPassword    = trim($_POST['clientRegPassword']);
+    $clientConPassword = trim($_POST['clientRegConPassword']);
 
     $clientModel = new ClientLogin();
 
@@ -79,13 +93,11 @@ if (isset($_POST['clientRegEmail'], $_POST['clientRegPassword'], $_POST['clientR
     } else {
         echo json_encode(["status" => "error", "message" => "Registration failed. Try again."]);
     }
-
     exit;
 }
 
-
-
-
-    // ✅ If neither set → invalid request
-    echo json_encode(["status" => "error", "message" => "Invalid request"]);
-}
+/**
+ * ---------------- Fallback ----------------
+ */
+echo json_encode(["status" => "error", "message" => "Invalid request"]);
+exit;

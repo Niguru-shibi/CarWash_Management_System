@@ -1,16 +1,15 @@
-
 <!-- Banner -->
 <div class="card-glass text-center mb-4 p-4 mx-3 mt-4">
-  <h4 class="fw-bold text-gradient">📨 Admin Contacts</h4>
+  <h4 class="fw-bold text-gradient">💬 Admin Contacts</h4>
   <p class="text-muted-light">Manage and reply to client inquiries efficiently.</p>
 </div>
 
 <div class="px-3 mb-5">
-  <!-- Contact Messages Table -->
+  <!-- Messages Table Card -->
   <div class="card-glass p-4">
-    <h5 class="fw-bold text-gradient mb-3 text-center">💬 Client Messages</h5>
+    <h5 class="fw-bold text-gradient mb-3 text-center">📨 Client Messages</h5>
     <div class="table-responsive">
-      <table class="table table-dark table-hover align-middle mb-0">
+      <table class="table table-dark table-hover align-middle mb-0" id="inquiryTable">
         <thead class="table-gradient text-white">
           <tr>
             <th>#</th>
@@ -22,31 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Example Messages -->
-          <tr>
-            <td>1</td>
-            <td>Juan Dela Cruz</td>
-            <td>juan@email.com</td>
-            <td>How much for premium wash?</td>
-            <td>2025-09-10</td>
-            <td>
-              <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#replyModal" 
-                      onclick="setReply('Juan Dela Cruz', 'juan@email.com')">Reply</button>
-              <button class="btn btn-sm btn-danger">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Maria Santos</td>
-            <td>maria@email.com</td>
-            <td>Do you offer home service?</td>
-            <td>2025-09-09</td>
-            <td>
-              <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#replyModal" 
-                      onclick="setReply('Maria Santos', 'maria@email.com')">Reply</button>
-              <button class="btn btn-sm btn-danger">Delete</button>
-            </td>
-          </tr>
+          <!-- Populated dynamically via AJAX -->
         </tbody>
       </table>
     </div>
@@ -57,11 +32,11 @@
 <div class="modal fade" id="replyModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content card-glass">
-      <div class="modal-header border-0">
-        <h5 class="modal-title fw-bold text-gradient">✉️ Reply to Client</h5>
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Reply to Client</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form>
+      <form id="replyForm">
         <div class="modal-body">
           <div class="mb-3">
             <label class="form-label">Client Name</label>
@@ -73,10 +48,10 @@
           </div>
           <div class="mb-3">
             <label class="form-label">Your Reply</label>
-            <textarea class="form-control" rows="4" placeholder="Type your response here..." required></textarea>
+            <textarea class="form-control" rows="4" id="replyMessage" placeholder="Type your response here..." required></textarea>
           </div>
         </div>
-        <div class="modal-footer border-0">
+        <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success">Send Reply</button>
         </div>
@@ -84,6 +59,71 @@
     </div>
   </div>
 </div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function loadInquiries() {
+    $.ajax({
+        url: '../../CarWash_Management_System/controller/contact.php?action=getcontact',
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            let tableBody = "";
+            let n = 1;
+
+            if (!response || response.length === 0) {
+                tableBody = `<tr><td colspan="6" class="text-center">No data found</td></tr>`;
+            } else {
+                response.forEach(function(inq) {
+                    tableBody += `
+                        <tr>
+                          <td>${n++}</td>
+                          <td>${inq.contact_name}</td>
+                          <td>${inq.contact_email}</td>
+                          <td>${inq.contact_message}</td>
+                          <td>${inq.contact_date}</td>
+                          <td>
+                            <button class="btn btn-sm btn-primary replyBtn" 
+                                    data-name="${inq.contact_name}" 
+                                    data-email="${inq.contact_email}">Reply</button>
+                            <button class="btn btn-sm btn-danger deleteBtn" 
+                                    data-id="${inq.id}">Delete</button>
+                          </td>
+                        </tr>
+                    `;
+                });
+            }
+
+            $("#inquiryTable tbody").html(tableBody);
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error:", error);
+            $("#inquiryTable tbody").html(`<tr><td colspan="6" class="text-center text-danger">Failed to load data</td></tr>`);
+        }
+    });
+}
+
+// Load immediately
+loadInquiries();
+setInterval(loadInquiries, 5000);
+
+$(document).on('click', '.replyBtn', function() {
+    $('#clientName').val($(this).data('name'));
+    $('#clientEmail').val($(this).data('email'));
+    $('#replyModal').modal('show');
+});
+
+$(document).on('click', '.deleteBtn', function() {
+    const id = $(this).data('id');
+    if (confirm("Are you sure you want to delete this message?")) {
+        $.post('../../CarWash_Management_System/controller/contact.php', { deleteId: id }, function(res) {
+            alert(res.message);
+            loadInquiries();
+        }, 'json');
+    }
+});
+</script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
@@ -96,15 +136,6 @@ body {
   padding-top: 70px;
 }
 
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  background: linear-gradient(to right, #38bdf8, #0ea5e9, #1d4ed8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 /* Glass Cards */
 .card-glass {
   background: rgba(255, 255, 255, 0.05);
@@ -114,6 +145,7 @@ body {
   backdrop-filter: blur(15px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   color: #fff;
+  margin-bottom: 20px;
 }
 .card-glass:hover {
   transform: translateY(-6px);
@@ -137,28 +169,4 @@ body {
 .text-muted-light {
   color: #9ca3af;
 }
-
-/* Light Mode */
-body.light {
-  background: #f9fafb;
-  color: #111;
-}
-body.light .card-glass {
-  background: rgba(255, 255, 255, 0.9);
-  color: #111;
-}
 </style>
-
-<script>
-  const themeToggle = document.getElementById("themeToggle");
-  themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("light");
-    themeToggle.classList.toggle("bi-brightness-high");
-    themeToggle.classList.toggle("bi-moon-stars");
-  });
-
-  function setReply(name, email) {
-    document.getElementById('clientName').value = name;
-    document.getElementById('clientEmail').value = email;
-  }
-</script>

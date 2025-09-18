@@ -11,17 +11,9 @@
   }
 
   @keyframes gradientBG {
-    0% {
-      background-position: 0% 50%;
-    }
-
-    50% {
-      background-position: 100% 50%;
-    }
-
-    100% {
-      background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   /* Contact Section */
@@ -48,72 +40,24 @@
   }
 
   @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(50px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   /* Left Info */
-  .contact-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1.5rem;
-  }
+  .contact-info { display: flex; flex-direction: column; justify-content: center; gap: 1.5rem; }
+  .contact-info h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 1rem; color: #ffc107; }
+  .contact-info p { color: #f1f1f1; line-height: 1.7; }
 
-  .contact-info h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #ffc107;
-  }
-
-  .contact-info p {
-    color: #f1f1f1;
-    line-height: 1.7;
-  }
-
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 1.1rem;
-    transition: transform 0.3s ease;
-  }
-
-  .contact-item i {
-    font-size: 1.6rem;
-    color: #ffc107;
-    transition: transform 0.3s ease;
-  }
-
-  .contact-item:hover {
-    transform: translateX(8px);
-  }
-
-  .contact-item:hover i {
-    transform: scale(1.2);
-  }
+  .contact-item { display: flex; align-items: center; gap: 1rem; font-size: 1.1rem; transition: transform 0.3s ease; }
+  .contact-item i { font-size: 1.6rem; color: #ffc107; transition: transform 0.3s ease; }
+  .contact-item:hover { transform: translateX(8px); }
+  .contact-item:hover i { transform: scale(1.2); }
 
   /* Right Form */
-  .contact-form form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .form-group {
-    position: relative;
-  }
-
-  .form-group input,
-  .form-group textarea {
+  .contact-form form { display: flex; flex-direction: column; gap: 1.5rem; }
+  .form-group { position: relative; }
+  .form-group input, .form-group textarea {
     width: 100%;
     padding: 14px 16px 14px 44px;
     border: none;
@@ -126,34 +70,19 @@
     transition: all 0.3s ease;
   }
 
-  /* Glowing border on focus */
-  .form-group input:focus,
-  .form-group textarea:focus {
+  .form-group input:focus, .form-group textarea:focus {
     border: 2px solid #0d6efd;
     box-shadow: 0 0 12px rgba(13, 110, 253, 0.7);
   }
 
-  .form-group i {
-    position: absolute;
-    top: 50%;
-    left: 14px;
-    transform: translateY(-50%);
-    color: #0d6efd;
-    font-size: 1rem;
-  }
-
-  .form-group textarea {
-    resize: none;
-  }
-
-  /* Label styles */
+  .form-group i { position: absolute; top: 50%; left: 14px; transform: translateY(-50%); color: #0d6efd; font-size: 1rem; }
+  .form-group textarea { resize: none; }
   .form-group label {
     position: absolute;
     top: -10px;
     left: 40px;
     font-size: 0.85rem;
     background: #0a192f;
-    /* ✅ matches theme */
     color: #ccc;
     padding: 0 8px;
     border-radius: 6px;
@@ -161,15 +90,11 @@
     transition: all 0.3s ease;
     box-shadow: none;
   }
-
-  /* When active, glow like input */
-  .form-group input:focus+label,
-  .form-group textarea:focus+label {
+  .form-group input:focus+label, .form-group textarea:focus+label {
     color: #0d6efd;
     box-shadow: 0 0 8px rgba(13, 110, 253, 0.7);
   }
 
-  /* Button */
   .contact-form button {
     padding: 14px;
     border: none;
@@ -182,16 +107,8 @@
     transition: all 0.3s ease;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
-
-  .contact-form button:hover {
-    background: linear-gradient(135deg, #e0a800, #cc8400);
-    transform: scale(1.05);
-  }
-
-  .contact-form button:active {
-    transform: scale(0.95);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
+  .contact-form button:hover { background: linear-gradient(135deg, #e0a800, #cc8400); transform: scale(1.05); }
+  .contact-form button:active { transform: scale(0.95); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
 
   /* Popup */
   .popup {
@@ -208,39 +125,16 @@
     transition: all 0.4s ease;
     z-index: 9999;
   }
-
-  .popup.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .popup.error {
-    background: #dc3545;
-  }
+  .popup.show { opacity: 1; transform: translateY(0); }
+  .popup.error { background: #dc3545; }
 
   /* Map */
-  .map-container {
-    margin-top: 2rem;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-  }
-
-  .map-container iframe {
-    width: 100%;
-    height: 250px;
-    border: 0;
-  }
+  .map-container { margin-top: 2rem; border-radius: 15px; overflow: hidden; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); }
+  .map-container iframe { width: 100%; height: 250px; border: 0; }
 
   @media (max-width: 950px) {
-    .contact-container {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-
-    .contact-info {
-      align-items: center;
-    }
+    .contact-container { grid-template-columns: 1fr; text-align: center; }
+    .contact-info { align-items: center; }
   }
 </style>
 
@@ -262,80 +156,98 @@
         <div class="map-container">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3926.440979688939!2d124.99877637578838!3d11.16092218901506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33085f6d1a0e52c7%3A0xddd3560a6b2a8414!2sLeyte%20Academic%20Center!5e0!3m2!1sen!2sph!4v1737173064000!5m2!1sen!2sph"
-            width="100%"
-            height="250"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
           </iframe>
         </div>
-
       </div>
 
       <!-- Right Form -->
       <div class="contact-form">
-        <form id="contactForm">
+        <div id="contactMessage"></div> <!-- Message display -->
+
+        <form id="sendContactForm">
+
           <div class="form-group">
             <i class="fas fa-user"></i>
-            <input type="text" id="name" placeholder=" Name" required>
-            <label for="name">Your Name</label>
+            <input type="text" id="contactName" name="contactName" placeholder=" Name" required>
+            <label for="contactName">Your Name</label>
           </div>
 
           <div class="form-group">
             <i class="fas fa-envelope"></i>
-            <input type="email" id="email" placeholder=" Email" required>
-            <label for="email">Your Email</label>
+            <input type="email" id="contactEmail" name="contactEmail" placeholder=" Email" required>
+            <label for="contactEmail">Your Email</label>
           </div>
 
           <div class="form-group">
             <i class="fas fa-mobile-alt"></i>
-            <input type="text" id="contact" placeholder=" Contact No./Facebook" required>
-            <label for="contact">Your Contact No./ Contact Info</label>
+            <input type="text" id="contactContact" name="contactContact" placeholder=" Contact No./Facebook" required>
+            <label for="contactContact">Your Contact No./Contact Info</label>
           </div>
 
           <div class="form-group">
             <i class="fas fa-map-marker-alt"></i>
-            <input type="text" id="address" placeholder=" Address" required>
-            <label for="address">Your Address</label>
+            <input type="text" id="contactAddress" name="contactAddress" placeholder=" Address" required>
+            <label for="contactAddress">Your Address</label>
           </div>
 
           <div class="form-group">
             <i class="fas fa-comment-dots"></i>
-            <textarea id="message" rows="4" placeholder=" Message" required></textarea>
-            <label for="message">Your Message</label>
+            <textarea id="contactMessageText" name="contactMessage" rows="4" placeholder=" Message" required></textarea>
+            <label for="contactMessageText">Your Message</label>
           </div>
 
-          <button type="submit">Send Message</button>
+          <button type="submit" id="sendContactBtn">Send Message</button>
+
         </form>
       </div>
+
     </div>
   </section>
 
   <!-- Popup -->
   <div id="popup" class="popup"></div>
 
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <script>
-    const form = document.getElementById("contactForm");
-    const popup = document.getElementById("popup");
+    $(function () {
+      const popup = $('#popup');
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
+      $('#sendContactForm').on('submit', function(e) {
+        e.preventDefault();
+        $('#sendContactBtn').prop('disabled', true).text('Please wait...');
+        $('#contactMessage').empty();
 
-      const success = true; // simulate backend
+        $.ajax({
+          url: '../../CarWash_Management_System/controller/contact.php',
+          type: 'POST',
+          data: $(this).serialize(),
+          dataType: 'json',
+          success: function(res) {
+            if (res.status === 'success') {
+              popup.text('Message sent successfully!').removeClass('error').addClass('show');
+              $('#sendContactForm')[0].reset();
+            } else {
+              popup.text(res.message).removeClass('success').addClass('show error');
+            }
 
-      if (success) {
-        popup.textContent = "Message sent successfully!";
-        popup.className = "popup show";
-      } else {
-        popup.textContent = "Error sending message. Try again!";
-        popup.className = "popup show error";
-      }
+            setTimeout(() => {
+              popup.removeClass('show error');
+            }, 3000);
 
-      setTimeout(() => {
-        popup.className = "popup";
-      }, 3000);
-      form.reset();
+            $('#sendContactBtn').prop('disabled', false).text('Send Message');
+          },
+          error: function() {
+            popup.text('Server error! Please try again.').removeClass('success').addClass('show error');
+            setTimeout(() => {
+              popup.removeClass('show error');
+            }, 3000);
+            $('#sendContactBtn').prop('disabled', false).text('Send Message');
+          }
+        });
+      });
     });
   </script>
 </body>
