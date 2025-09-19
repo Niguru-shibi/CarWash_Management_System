@@ -1,204 +1,105 @@
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <style>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
+
     body {
-      font-family: "Poppins", sans-serif;
-      background: #f4f7fb;
-      margin: 0;
-      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #0a192f, #001f54);
+      color: #fff;
+      min-height: 100vh;
+      padding-top: 70px;
     }
 
-    .container {
-      max-width: 950px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    /* Gradient Text */
+    .text-gradient {
+      background: linear-gradient(to right, #38bdf8, #0ea5e9, #1d4ed8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 26px;
-      font-weight: 700;
-      color: #1e293b;
+    /* Muted text */
+    .text-muted-light {
+      color: #9ca3af;
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+    /* Glass card */
+    .card-glass {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.2);
+      backdrop-filter: blur(15px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #fff;
+    }
+    .card-glass:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 25px rgba(14, 165, 233, 0.35);
     }
 
-    label {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 6px;
-      display: block;
-      color: #334155;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1px solid #cbd5e1;
-      font-size: 14px;
-      box-sizing: border-box;
-      background: #fff;
-      transition: border 0.2s, box-shadow 0.2s;
-    }
-
-    input:focus, select:focus {
-      outline: none;
-      border-color: #0072ff;
-      box-shadow: 0 0 0 3px rgba(0,114,255,0.15);
-    }
-
-    .form-actions {
-      margin-top: 30px;
-      display: flex;
-      justify-content: flex-end;
-      gap: 14px;
-    }
-
-    .btn {
-      padding: 12px 20px;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 10px;
+    /* Buttons */
+    .btn-custom {
+      background: linear-gradient(to right, #38bdf8, #0ea5e9, #1d4ed8);
       border: none;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-
-    .btn-cancel {
-      background: #f3f4f6;
-      color: #374151;
-    }
-    .btn-cancel:hover {
-      background: #e2e8f0;
-    }
-
-    .btn-save {
-      background: linear-gradient(90deg,#00c6ff,#0072ff);
       color: white;
-      box-shadow: 0 3px 10px rgba(0,114,255,0.25);
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 10px 20px;
+      transition: 0.3s;
     }
-    .btn-save:hover {
-      opacity: 0.9;
+    .btn-custom:hover {
+      opacity: 0.85;
+    }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #38bdf8;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Edit Account</h1>
-    <form id="editAccountForm">
-      <div class="form-grid">
-        <div>
-          <label>Username</label>
-          <input type="text" name="username" placeholder="Enter username" required>
-        </div>
-        <div>
-          <label>Email</label>
-          <input type="email" name="email" placeholder="Enter email" required>
-        </div>
-        <div>
-          <label>Last Name</label>
-          <input type="text" name="lname" placeholder="Enter last name" required>
-        </div>
-        <div>
-          <label>First Name</label>
-          <input type="text" name="fname" placeholder="Enter first name" required>
-        </div>
-        <div>
-          <label>Middle Name</label>
-          <input type="text" name="mname" placeholder="Enter middle name">
-        </div>
-        <div>
-          <label>Contact</label>
-          <input type="text" name="contact" placeholder="09XXXXXXXXX" required>
-        </div>
-        <div>
-          <label>Province</label>
-          <select name="province" id="provinceSelect">
-            <option>Select Province</option>
-            <option>Cebu</option>
-            <option>Bohol</option>
-            <option>Davao del Sur</option>
-          </select>
-        </div>
-        <div>
-          <label>Municipality</label>
-          <select name="municipality" id="municipalitySelect">
-            <option>Select Municipality</option>
-          </select>
-        </div>
-        <div>
-          <label>Barangay</label>
-          <select name="barangay" id="barangaySelect">
-            <option>Select Barangay</option>
-          </select>
-        </div>
-        <div>
-          <label>Street</label>
-          <input type="text" name="street" placeholder="Enter street">
-        </div>
-      </div>
-
-      <div class="form-actions">
-        <button type="button" class="btn btn-cancel" onclick="window.location.href='dashboard.html'">Cancel</button>
-        <button type="submit" class="btn btn-save">Save Changes</button>
-      </div>
-    </form>
+  <!-- Profile Header -->
+  <div class="card-glass text-center mb-4 p-4 mx-3 mt-4">
+    <h4 class="fw-bold text-gradient">👤 My Profile</h4>
+    <p class="text-muted-light">View and update your personal information.</p>
   </div>
 
-  <script>
-    // Example dropdown data
-    const municipalities = {
-      "Cebu": ["Cebu City", "Mandaue", "Lapu-Lapu"],
-      "Bohol": ["Tagbilaran", "Panglao", "Tubigon"],
-      "Davao del Sur": ["Digos", "Santa Cruz", "Bansalan"]
-    };
+  <!-- Profile Card -->
+  <section class="px-3 mb-5">
+    <div class="card-glass p-4 mx-auto" style="max-width: 600px;">
+      <div class="text-center mb-4">
+        <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-avatar mb-3">
+        <h5 class="fw-bold">Juan Dela Cruz</h5>
+        <p class="text-muted-light">juan.delacruz@example.com</p>
+        <button class="btn btn-sm btn-custom"><i class="bi bi-camera"></i> Change Photo</button>
+      </div>
 
-    const barangays = {
-      "Cebu City": ["Lahug", "Mabolo", "Guadalupe"],
-      "Mandaue": ["Centro", "Banilad", "Tipolo"],
-      "Lapu-Lapu": ["Pusok", "Basak", "Gun-ob"],
-      "Tagbilaran": ["Cogon", "Bool", "Dao"]
-    };
+      <form>
+        <div class="mb-3">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-control" value="Juan Dela Cruz">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" value="juan.delacruz@example.com">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone</label>
+          <input type="text" class="form-control" value="+63 912 345 6789">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" value="password123">
+        </div>
+        <div class="text-end">
+          <button type="submit" class="btn btn-custom">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </section>
 
-    document.getElementById("provinceSelect").addEventListener("change", function() {
-      let muniSelect = document.getElementById("municipalitySelect");
-      muniSelect.innerHTML = "<option>Select Municipality</option>";
-      if (municipalities[this.value]) {
-        municipalities[this.value].forEach(m => {
-          muniSelect.innerHTML += `<option>${m}</option>`;
-        });
-      }
-    });
-
-    document.getElementById("municipalitySelect").addEventListener("change", function() {
-      let brgySelect = document.getElementById("barangaySelect");
-      brgySelect.innerHTML = "<option>Select Barangay</option>";
-      if (barangays[this.value]) {
-        barangays[this.value].forEach(b => {
-          brgySelect.innerHTML += `<option>${b}</option>`;
-        });
-      }
-    });
-
-    // Form submit (SweetAlert success message)
-    document.getElementById("editAccountForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Saved Successfully!',
-        text: 'Your account details have been updated.',
-        showConfirmButton: false,
-        timer: 2000
-      });
-    });
-  </script>
+</body>
+</html>

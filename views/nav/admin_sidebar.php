@@ -100,14 +100,61 @@
     <i class="bi bi-droplet-fill me-2" style="font-size: 1.5rem; color: #0dcaf0;"></i>AutoShine
   </div>
   <nav class="nav flex-column px-1">
-    <a href="../views/dashboard/admin_dashboard.php" class="nav-link load-page active"><i class="bi bi-speedometer2"></i> Dashboard</a>
-    <a href="../views/dashboard/admin_home.php" class="nav-link load-page"><i class="bi bi-house-door"></i> Home</a>
-    <a href="../views/dashboard/admin_about.php" class="nav-link load-page"><i class="bi bi-info-circle"></i> About</a>
-    <a href="../views/dashboard/admin_services.php" class="nav-link load-page"><i class="bi bi-tools"></i> Services</a>
-    <a href="../views/dashboard/admin_location.php" class="nav-link load-page"><i class="bi bi-geo-alt"></i> Location</a>
-    <a href="../views/dashboard/admin_pricing.php" class="nav-link load-page"><i class="bi bi-card-list"></i> Pricing</a>
-    <a href="../views/dashboard/admin_contact.php" class="nav-link load-page"><i class="bi bi-envelope"></i> Contact</a>
+
+    <!-- System Section -->
+    <div class="sidebar-section text-uppercase small fw-bold px-3 mt-2 mb-1"
+      style="color: rgba(255,255,255,0.7);">
+      System
+    </div>
+    <a href="../views/dashboard/admin_dashboard.php" class="nav-link load-page active">
+      <i class="bi bi-speedometer2"></i> Dashboard
+    </a>
+    <a href="../views/dashboard/admin_bookings.php" class="nav-link load-page">
+      <i class="bi bi-calendar-check"></i> Bookings
+    </a>
+    <a href="../views/dashboard/admin_inquiries.php" class="nav-link load-page">
+      <i class="bi bi-chat-dots"></i> Inquiries
+    </a>
+    <a href="../views/dashboard/admin_rooms.php" class="nav-link load-page">
+      <i class="bi bi-door-closed"></i> Room Status
+    </a>
+
+
+    <!-- Website Section -->
+    <div class="sidebar-section text-uppercase small fw-bold px-3 mt-3 mb-1"
+      style="color: rgba(255,255,255,0.7);">
+      Website
+    </div>
+    <a href="../views/dashboard/admin_home.php" class="nav-link load-page">
+      <i class="bi bi-house-door"></i> Home
+    </a>
+    <a href="../views/dashboard/admin_about.php" class="nav-link load-page">
+      <i class="bi bi-info-circle"></i> About
+    </a>
+    <a href="../views/dashboard/admin_services.php" class="nav-link load-page">
+      <i class="bi bi-tools"></i> Services
+    </a>
+    <a href="../views/dashboard/admin_location.php" class="nav-link load-page">
+      <i class="bi bi-geo-alt"></i> Location
+    </a>
+    <a href="../views/dashboard/admin_pricing.php" class="nav-link load-page">
+      <i class="bi bi-card-list"></i> Pricing
+    </a>
+
+    <!-- Account Section -->
+    <div class="sidebar-section text-uppercase small fw-bold px-3 mt-3 mb-1"
+      style="color: rgba(255,255,255,0.7);">
+      Account
+    </div>
+    <a href="../views/dashboard/admin_settings.php" class="nav-link load-page">
+      <i class="bi bi-gear"></i> Settings
+    </a>
+    <a href="../views/dashboard/admin_logout.php" class="nav-link">
+      <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
+
   </nav>
+
 </aside>
 
 <!-- Sidebar Overlay for Mobile -->

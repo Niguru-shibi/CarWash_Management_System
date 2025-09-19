@@ -99,11 +99,40 @@
   <div class="sidebar-header text-center mb-4">
     <i class="bi bi-droplet-fill me-2" style="font-size: 1.5rem; color: #0dcaf0;"></i>AutoShine
   </div>
-  <nav class="nav flex-column px-1">
-  <a href="../views/client_dashboard/client_profile.php" class="nav-link load-page active"><i class="bi bi-person"></i></i> Profile</a>
-    <a href="../views/client_dashboard/client_dashboard.php" class="nav-link load-page"><i class="bi bi-speedometer2"></i> Dashboard</a>
-    <a href="../views/client_dashboard/client_booking.php" class="nav-link load-page"><i class="bi bi-house-door"></i> Home</a>   
-  </nav>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header text-center mb-4">
+      <i class="bi bi-droplet-fill me-2" style="font-size: 1.5rem; color: #0dcaf0;"></i>AutoShine
+    </div>
+    <nav class="nav flex-column px-1">
+      <a href="../views/client_dashboard/client_dashboard.php" class="nav-link load-page">
+        <i class="bi bi-speedometer2"></i> Dashboard
+      </a>
+      <a href="../views/client_dashboard/client_bookings.php" class="nav-link load-page">
+        <i class="bi bi-calendar-plus"></i> Book a Service
+      </a>
+      <a href="../views/client_dashboard/client_my_bookings.php" class="nav-link load-page">
+        <i class="bi bi-journal-text"></i> My Bookings
+      </a>
+      <a href="../views/client_dashboard/client_services.php" class="nav-link load-page">
+        <i class="bi bi-tools"></i> Services
+      </a>
+      <a href="../views/client_dashboard/client_pricing.php" class="nav-link load-page">
+        <i class="bi bi-cash-coin"></i> Pricing
+      </a>
+      <a href="../views/client_dashboard/client_profile.php" class="nav-link load-page">
+        <i class="bi bi-person-circle"></i> My Profile
+      </a>
+      <a href="../views/client_dashboard/client_inquiries.php" class="nav-link load-page">
+        <i class="bi bi-chat-dots"></i> Inquiries
+      </a>
+      <hr class="text-white mx-3">
+      <a href="../views/client_dashboard/client_logout.php" class="nav-link">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </a>
+    </nav>
+  </aside>
+
 </aside>
 
 <!-- Sidebar Overlay for Mobile -->

@@ -1,6 +1,6 @@
 <!-- Banner -->
 <div class="card-glass text-center mb-4 p-4 mx-3 mt-4">
-  <h4 class="fw-bold text-gradient">💬 Admin Contacts</h4>
+  <h4 class="fw-bold text-gradient">💬 Admin Inquiries</h4>
   <p class="text-muted-light">Manage and reply to client inquiries efficiently.</p>
 </div>
 

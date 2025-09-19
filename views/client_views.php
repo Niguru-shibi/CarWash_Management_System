@@ -94,7 +94,7 @@
       });
 
       // Load the dashboard page by default
-      loadPage("client_dashboard/client_profile.php");
+      loadPage("client_dashboard/client_dashboard.php");
     });
   </script>
 

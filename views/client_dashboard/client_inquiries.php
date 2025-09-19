@@ -1,4 +1,4 @@
- <style>
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
 
     body {
@@ -72,78 +72,68 @@
     .btn-danger:hover {
       background-color: #dc2626;
     }
-
-    .btn-secondary {
-      background-color: #64748b;
-      border: none;
-    }
   </style>
 </head>
 <body>
 
-  <!-- Dashboard Header -->
+  <!-- Inquiries Header -->
   <div class="card-glass text-center mb-4 p-4 mx-3 mt-4">
-    <h4 class="fw-bold text-gradient">🚗 Client Dashboard</h4>
-    <p class="text-muted-light">Welcome back! Here’s an overview of your activity.</p>
+    <h4 class="fw-bold text-gradient">✉️ Inquiries</h4>
+    <p class="text-muted-light">Check and manage your messages and inquiries here.</p>
   </div>
 
-  <!-- Dashboard Cards -->
-  <div class="row g-4 mb-4 px-3">
-    <div class="col-md-4">
-      <div class="card-glass text-center p-4">
-        <i class="bi bi-calendar-check fs-2 text-info mb-2"></i>
-        <h6 class="fw-bold">My Bookings</h6>
-        <h2 class="fw-bolder">5</h2>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card-glass text-center p-4">
-        <i class="bi bi-star-fill fs-2 text-warning mb-2"></i>
-        <h6 class="fw-bold">Completed</h6>
-        <h2 class="fw-bolder">3</h2>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card-glass text-center p-4">
-        <i class="bi bi-clock-history fs-2 text-cyan mb-2"></i>
-        <h6 class="fw-bold">Pending</h6>
-        <h2 class="fw-bolder">2</h2>
-      </div>
-    </div>
-  </div>
-
-  <!-- Recent Activity -->
+  <!-- Inquiries Table -->
   <section class="px-3 mb-5">
     <div class="card-glass p-4">
-      <h5 class="mb-3 text-center fw-bold text-gradient">📅 Recent Activity</h5>
+      <h5 class="mb-3 text-center fw-bold text-gradient">Recent Inquiries</h5>
       <div class="table-responsive">
         <table class="table table-dark table-hover align-middle mb-0">
           <thead class="table-gradient text-white">
             <tr>
               <th>#</th>
-              <th>Service</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Message</th>
               <th>Date</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
+            <!-- Example rows (replace with PHP loop later) -->
             <tr>
               <td>1</td>
-              <td>Full Wash</td>
-              <td>2025-09-15</td>
-              <td><span class="badge bg-success">Completed</span></td>
+              <td>Juan Dela Cruz</td>
+              <td>juan@example.com</td>
+              <td>What are your car wash packages?</td>
+              <td>2025-09-18</td>
+              <td><span class="badge bg-warning text-dark">Pending</span></td>
+              <td>
+                <button class="btn btn-sm btn-success"><i class="bi bi-check2-circle"></i></button>
+                <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+              </td>
             </tr>
             <tr>
               <td>2</td>
-              <td>Waxing</td>
+              <td>Maria Clara</td>
+              <td>maria@example.com</td>
+              <td>Do you offer monthly subscriptions?</td>
               <td>2025-09-17</td>
-              <td><span class="badge bg-warning text-dark">Pending</span></td>
+              <td><span class="badge bg-success">Replied</span></td>
+              <td>
+                <button class="btn btn-sm btn-secondary" disabled><i class="bi bi-lock"></i></button>
+              </td>
             </tr>
             <tr>
               <td>3</td>
-              <td>Interior Cleaning</td>
-              <td>2025-09-10</td>
-              <td><span class="badge bg-success">Completed</span></td>
+              <td>Jose Rizal</td>
+              <td>rizal@example.com</td>
+              <td>Is there a discount for first-time customers?</td>
+              <td>2025-09-16</td>
+              <td><span class="badge bg-danger">Closed</span></td>
+              <td>
+                <button class="btn btn-sm btn-secondary" disabled><i class="bi bi-lock"></i></button>
+              </td>
             </tr>
           </tbody>
         </table>
