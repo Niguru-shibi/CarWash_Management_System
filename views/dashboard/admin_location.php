@@ -1,83 +1,64 @@
-
-
 <!-- Banner -->
 <div class="card-glass text-center mb-4 p-4 mx-3 mt-4">
   <h4 class="fw-bold text-gradient">📍 Branch Management</h4>
   <p class="text-muted-light">Add, update, and manage your Car Wash branches efficiently.</p>
 </div>
 
-<div class="px-3 mb-5">
+<div class="container my-4">
   <!-- Add Location Form -->
-  <div class="card-glass p-4 mb-4">
-    <h5 class="fw-bold text-gradient mb-3">➕ Add New Branch</h5>
-    <form>
+  <div class="card shadow-sm p-4 mb-4">
+    <h4 class="mb-3">Add New Branch</h4>
+    <form id="addBranchLocationForm" >
       <div class="row g-3">
         <div class="col-md-6">
           <label class="form-label">Branch Name</label>
-          <input type="text" class="form-control" placeholder="Enter branch name" required>
+          <input type="text" class="form-control" placeholder="Enter Branch Name" name="washPointName" required>
         </div>
         <div class="col-md-6">
-          <label class="form-label">Location</label>
-          <input type="text" class="form-control" placeholder="Enter location" required>
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Phone</label>
-          <input type="text" class="form-control" placeholder="Enter phone number" required>
+          <label class="form-label">Branch Location</label>
+          <input type="text" class="form-control" placeholder="Enter Branch location" name="washPointLocation" required>
         </div>
         <div class="col-md-6">
           <label class="form-label">Email</label>
-          <input type="email" class="form-control" placeholder="Enter email address" required>
+          <input type="email" class="form-control" placeholder="Enter email address" name="washPointEmail" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Phone</label>
+          <input type="text" class="form-control" placeholder="Enter phone number" name="washPointContact" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Map Link</label>
+          <input type="text" class="form-control" placeholder="Enter Map Link" name="washPointMapLink" required>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary mt-3">Add Branch</button>
+      <button type="submit" class="btn btn-primary mt-3" id="addBranchBtn">Add Branch</button>
     </form>
   </div>
 
   <!-- Location Table -->
-  <div class="card-glass p-4">
-    <h5 class="fw-bold text-gradient mb-3 text-center">🏢 Branch Locations</h5>
-    <div class="table-responsive">
-      <table class="table table-dark table-hover align-middle mb-0">
-        <thead class="table-gradient text-white">
-          <tr>
-            <th>#</th>
-            <th>Branch Name</th>
-            <th>Location</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Main Branch</td>
-            <td>Downtown City</td>
-            <td>+63 912 345 6789</td>
-            <td>mainbranch@carwash.com</td>
-            <td>
-              <button class="btn btn-sm btn-warning">Edit</button>
-              <button class="btn btn-sm btn-danger">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>North Branch</td>
-            <td>North Avenue</td>
-            <td>+63 987 654 3210</td>
-            <td>northbranch@carwash.com</td>
-            <td>
-              <button class="btn btn-sm btn-warning">Edit</button>
-              <button class="btn btn-sm btn-danger">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="card shadow-sm p-4">
+    <h4 class="mb-3">Branch Locations</h4>
+    <table class="table table-striped table-hover" id="locationTable">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Branch Name</th>
+          <th>Brach Location</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Map Link</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
   </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
+  
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
 
 body {
@@ -147,5 +128,79 @@ body.light .card-glass {
     document.body.classList.toggle("light");
     themeToggle.classList.toggle("bi-brightness-high");
     themeToggle.classList.toggle("bi-moon-stars");
+  });
+
+  // ✅ Add Branch AJAX
+  $(function () {
+    // Load branches on page load
+    function loadBranches() {
+      $.ajax({
+        url: "../controller/location.php?action=getLocation",
+        type: "GET",
+        dataType: "json",
+        success: function (res) {
+          let rows = "";
+
+          if (!res || res.length === 0) {
+            rows = `<tr><td colspan="7" class="text-center text-muted">No branches found</td></tr>`;
+          } else {
+            res.forEach((branch, index) => {
+              rows += `
+                <tr>
+                  <td>${index + 1}</td>
+                  <td>${branch.washpoint_name}</td>
+                  <td>${branch.washpoint_location}</td>
+                  <td>${branch.washpoint_email}</td>
+                  <td>${branch.washpoint_num}</td>
+                  <td><a href="${branch.washpoint_map}" target="_blank">View Map</a></td>
+                  <td>
+                    <button class="btn btn-sm btn-warning editBranch" data-id="${branch.id}">Edit</button>
+                    <button class="btn btn-sm btn-danger deleteBranch" data-id="${branch.id}">Delete</button>
+                  </td>
+                </tr>
+              `;
+            });
+          }
+
+          $("#locationTable tbody").html(rows);
+        },
+        error: function () {
+          $("#locationTable tbody").html(
+            `<tr><td colspan="7" class="text-center text-danger">⚠ Failed to load branches</td></tr>`
+          );
+        }
+      });
+    }
+
+    // Initial load
+    loadBranches();
+
+    // Add new branch
+    $(document).on("submit", "#addBranchLocationForm", function (e) {
+      e.preventDefault();
+
+      $("#addBranchBtn").prop("disabled", true).text("Adding...");
+
+      $.ajax({
+        url: "../controller/location.php?action=addLocation",
+        type: "POST",
+        data: $(this).serialize(),
+        dataType: "json",
+        success: function (res) {
+          if (res.status === "success") {
+            alert(res.message);
+            $("#addBranchLocationForm")[0].reset();
+            loadBranches(); // reload table
+          } else {
+            alert("❌ " + res.message);
+          }
+          $("#addBranchBtn").prop("disabled", false).text("Add Branch");
+        },
+        error: function () {
+          alert("⚠ Server error, please try again.");
+          $("#addBranchBtn").prop("disabled", false).text("Add Branch");
+        }
+      });
+    });
   });
 </script>

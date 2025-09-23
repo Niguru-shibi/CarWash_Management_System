@@ -19,7 +19,6 @@
   <!-- jQuery CDN (must be before this script) -->
   <script src="../assets/js/jquery.js"></script>
 
-
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -59,22 +58,17 @@
   </main>
 
   <!-- AJax Script -->
-
   <script>
     $(function() {
       // Function to load a page via AJAX
       function loadPage(url) {
-        // Optional: Show loading spinner here
-
         $.ajax({
           url: url,
           type: "GET",
           success: function(data) {
-            // Optional: Hide loading spinner
             $("#mainContent").html(data);
           },
           error: function() {
-            // Optional: Hide loading spinner
             $("#mainContent").html("<p class='text-danger'>Error loading page. Please try again.</p>");
           }
         });
@@ -96,16 +90,14 @@
       loadPage("dashboard/admin_dashboard.php");
     });
   </script>
-  
-
   <!-- End AJax Script -->
 
-  <!-- Bootstra 5 Scripts -->
+  <!-- Bootstrap 5 Scripts -->
   <script src="../assets/js/bootstrap.bundle.min.js"></script>
 
   <!-- Datatables Scripts -->
   <script src="../assets/js/datatables.min.js"></script>
 
+  
 </body>
-
 </html>

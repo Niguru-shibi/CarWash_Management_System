@@ -47,15 +47,15 @@
     </button>
     <div class="navbar-brand-text">Dashboard</div>
 
+    <!-- Admin Dropdown -->
     <div class="dropdown ms-auto">
-        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="adminDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" 
+           id="adminDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button">
             <span class="d-none d-md-inline">Admin</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
             <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li>
-                <hr class="dropdown-divider" />
-            </li>
+            <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="../views/dashboard/admin_logout.php">Logout</a></li>
         </ul>
     </div>

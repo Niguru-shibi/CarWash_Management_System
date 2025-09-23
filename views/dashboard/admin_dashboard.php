@@ -144,11 +144,3 @@ body.light .card-glass {
 }
 </style>
 
-<script>
-  const themeToggle = document.getElementById("themeToggle");
-  themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("light");
-    themeToggle.classList.toggle("bi-brightness-high");
-    themeToggle.classList.toggle("bi-moon-stars");
-  });
-</script>
