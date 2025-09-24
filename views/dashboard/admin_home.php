@@ -21,15 +21,14 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Example Data -->
           <tr>
-            <td>Premium Car Wash</td>
-            <td>We deliver quick, affordable, and friendly car wash service.</td>
-            <td>Mon - Sun, 8:00 AM - 8:00 PM</td>
-            <td>info@carwash.com</td>
-            <td>+63 912 345 6789</td>
+            <td id="homeHeader">Loading...</td>
+            <td id="homeDesc">Loading...</td>
+            <td id="homeLocation">Loading...</td>
+            <td id="homeEmail">Loading...</td>
+            <td id="homeNumber">Loading...</td>
             <td>
-              <button class="btn btn-cyan btn-sm" data-bs-toggle="modal" data-bs-target="#editHomeModal">
+              <button class="btn btn-cyan btn-sm" data-bs-toggle="modal" data-bs-target="#editHomeModal" id="editBtn">
                 <i class="bi bi-pencil-square"></i> Edit
               </button>
             </td>
@@ -48,27 +47,33 @@
         <h5 class="modal-title fw-bold">✏️ Edit Website Information</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
-      <form>
+      <form id="editHomeForm">
         <div class="modal-body">
+          <input type="hidden" id="crsl_id" name="crsl_id">
+
           <div class="mb-3">
             <label class="form-label fw-bold">Website Title</label>
-            <input type="text" class="form-control" value="Premium Car Wash">
+            <input type="text" class="form-control" id="crsl_header" name="crsl_header">
           </div>
+
           <div class="mb-3">
             <label class="form-label fw-bold">Description</label>
-            <textarea class="form-control" rows="3">We deliver quick, affordable, and friendly car wash service.</textarea>
+            <textarea class="form-control" rows="3" id="crsl_desc" name="crsl_desc"></textarea>
           </div>
+
           <div class="mb-3">
             <label class="form-label fw-bold">Opening Hours</label>
-            <input type="text" class="form-control" value="Mon - Sun, 8:00 AM - 8:00 PM">
+            <input type="text" class="form-control" id="crsl_location" name="crsl_location">
           </div>
+
           <div class="mb-3">
             <label class="form-label fw-bold">Email</label>
-            <input type="email" class="form-control" value="info@carwash.com">
+            <input type="email" class="form-control" id="crsl_email" name="crsl_email">
           </div>
+
           <div class="mb-3">
             <label class="form-label fw-bold">Contact</label>
-            <input type="text" class="form-control" value="+63 912 345 6789">
+            <input type="text" class="form-control" id="crsl_number" name="crsl_number">
           </div>
         </div>
         <div class="modal-footer">
@@ -79,6 +84,11 @@
     </div>
   </div>
 </div>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../assets/js/home.js"></script>
+
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');

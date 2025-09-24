@@ -164,35 +164,36 @@
     $(function() {
       function loadWashingPlans() {
         $.ajax({
-          url: '../../CarWash_Management_System/controller/services.php?action=getServices',
+          url: '/Guerrero/CarWash_Management_System/controller/services.php?action=getServices',
           type: 'GET',
           dataType: 'json',
           success: function(plans) {
             $('#washingPlansContainer').empty();
-            if (plans.length === 0) {
+
+            if (!plans || plans.length === 0) {
               $('#washingPlansContainer').html('<div class="col-12 text-center text-light">No washing plans available.</div>');
               return;
             }
+
             plans.forEach(function(plan) {
               let planHTML = `
-                <div class="col-lg-3 col-md-6 mb-4">
-                  <div class="price-item text-center ${plan.featured ? 'featured-item' : ''}">
-                    <div class="price-header mb-3">
-                      <h3>${plan.washplan_name}</h3>
-                      <h2><span>₱</span><strong>${plan.washplan_price}</strong></h2>
-                    </div>
-                    <div class="price-body mb-4">
-                      <ul>
-                        <li>${plan.washplan_description}</li>
-                        <li>Duration: ${plan.washplan_duration}</li>
-                      </ul>
-                    </div>
-                    <div class="price-footer">
-                      <button class="btn btn-primary openModal">Book Now</button>
-                      <?php include 'client_modal.php'; ?>
-                    </div>
-                  </div>
-                </div>`;
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="price-item text-center ${plan.featured ? 'featured-item' : ''}">
+                <div class="price-header mb-3">
+                  <h3>${plan.washplan_name}</h3>
+                  <h2><span>₱</span><strong>${plan.washplan_price}</strong></h2>
+                </div>
+                <div class="price-body mb-4">
+                  <ul>
+                    <li>${plan.washplan_description}</li>
+                    <li>Duration: ${plan.washplan_duration}</li>
+                  </ul>
+                </div>
+                <div class="price-footer">
+                  <button class="btn btn-primary openModal" data-id="${plan.washplan_id}">Book Now</button>
+                </div>
+              </div>
+            </div>`;
               $('#washingPlansContainer').append(planHTML);
             });
           },
@@ -204,9 +205,11 @@
 
       loadWashingPlans();
 
-      // Handle booking modal
+      // Open booking modal
       $(document).on('click', '.openModal', function() {
+        const planId = $(this).data('id');
         $('#clientBookingModal').modal('show');
+        $('#selectedPlanId').val(planId); // optional if you want to pass plan ID
       });
     });
   </script>

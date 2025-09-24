@@ -1,13 +1,13 @@
-$(function() {
+$(function () {
     function loadServices() {
         $.ajax({
             url: '/Guerrero/CarWash_Management_System/controller/services.php?action=getServices',
             type: 'GET',
             dataType: 'json',
-            success: function(services) {
+            success: function (services) {
                 $('#servicesTableBody').empty();
 
-                services.forEach(function(service) {
+                services.forEach(function (service) {
                     let row = `
                         <tr>
                             <td>${service.washplan_name}</td>
@@ -23,7 +23,7 @@ $(function() {
                     $('#servicesTableBody').append(row);
                 });
             },
-            error: function() {
+            error: function () {
                 $('#servicesTableBody').html(`
                     <tr><td colspan="5" class="text-center text-danger">Failed to load services.</td></tr>
                 `);
@@ -35,22 +35,25 @@ $(function() {
     loadServices();
 
     // Handle Delete button click
-    $(document).on('click', '.deleteServiceBtn', function() {
+    $(document).on('click', '.deleteServiceBtn', function () {
         const serviceId = $(this).data('id');
-        if(confirm('Are you sure you want to delete this service?')) {
-            $.post('/Guerrero/CarWash_Management_System/controller/services.php?action=deleteService', { serviceId }, function(res) {
-                alert(res.message);
-                loadServices();
-            }, 'json');
+        if (confirm('Are you sure you want to delete this service?')) {
+            $.post(
+                '/Guerrero/CarWash_Management_System/controller/services.php?action=deleteService',
+                { serviceId },
+                function (res) {
+                    alert(res.message);
+                    loadServices();
+                },
+                'json'
+            );
         }
     });
 
     // Handle Edit button click
-    $(document).on('click', '.editServiceBtn', function() {
+    $(document).on('click', '.editServiceBtn', function () {
         const serviceId = $(this).data('id');
-        // You can fetch service details and fill the edit modal
-        // Then show: $('#editServiceModal').modal('show');
+        // TODO: fetch service details & populate edit modal
+        // $('#editServiceModal').modal('show');
     });
-
-    // Optional: handle Add Service form submission
 });

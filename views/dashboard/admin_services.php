@@ -106,16 +106,16 @@
 </div>
 
 <script>
-$(function() {
+  $(function() {
     function loadServices() {
-        $.ajax({
-            url: '../../CarWash_Management_System/controller/services.php?action=getServices',
-            type: 'GET',
-            dataType: 'json',
-            success: function(services) {
-                $('#servicesTableBody').empty();
-                services.forEach(function(service) {
-                    let row = `
+      $.ajax({
+        url: '../../CarWash_Management_System/controller/services.php?action=getServices',
+        type: 'GET',
+        dataType: 'json',
+        success: function(services) {
+          $('#servicesTableBody').empty();
+          services.forEach(function(service) {
+            let row = `
                         <tr>
                             <td>${service.washplan_name}</td>
                             <td>${service.washplan_description}</td>
@@ -127,69 +127,155 @@ $(function() {
                             </td>
                         </tr>
                     `;
-                    $('#servicesTableBody').append(row);
-                });
-            },
-            error: function() {
-                $('#servicesTableBody').html('<tr><td colspan="5" class="text-center text-danger">Failed to load services.</td></tr>');
-            }
-        });
+            $('#servicesTableBody').append(row);
+          });
+        },
+        error: function() {
+          $('#servicesTableBody').html('<tr><td colspan="5" class="text-center text-danger">Failed to load services.</td></tr>');
+        }
+      });
     }
 
     loadServices(); // initial load
 
     // Add Service
     $('#addServiceForm').on('submit', function(e) {
-        e.preventDefault();
-        const data = $(this).serialize();
-        $.post('../../CarWash_Management_System/controller/services.php?action=addService', data, function(res) {
-            alert(res.message);
-            if(res.status === 'success') {
-                $('#addServiceModal').modal('hide');
-                $('#addServiceForm')[0].reset();
-                loadServices();
-            }
-        }, 'json');
+      e.preventDefault();
+      const data = $(this).serialize();
+      $.post('../../CarWash_Management_System/controller/services.php?action=addService', data, function(res) {
+        alert(res.message);
+        if (res.status === 'success') {
+          $('#addServiceModal').modal('hide');
+          $('#addServiceForm')[0].reset();
+          loadServices();
+        }
+      }, 'json');
     });
 
     // Delete Service
     $(document).on('click', '.deleteServiceBtn', function() {
-        const serviceId = $(this).data('id');
-        if(confirm('Are you sure you want to delete this service?')) {
-            $.post('../../CarWash_Management_System/controller/services.php?action=deleteService', { id: serviceId }, function(res) {
-                alert(res.message);
-                loadServices();
-            }, 'json');
-        }
+      const serviceId = $(this).data('id');
+      if (confirm('Are you sure you want to delete this service?')) {
+        $.post('/Guerrero/CarWash_Management_System/controller/services.php?action=deleteService', {
+            serviceId
+          },
+          function(res) {
+            alert(res.message);
+            if (res.status === 'success') loadServices();
+          },
+          'json');
+      }
     });
 
     // Edit Service
     $(document).on('click', '.editServiceBtn', function() {
-        const serviceId = $(this).data('id');
-        $.get('../../CarWash_Management_System/controller/services.php?action=getServices', function(services) {
-            const service = services.find(s => s.washplan_id == serviceId);
-            if(service) {
-                $('#editServiceId').val(service.washplan_id);
-                $('#editServiceName').val(service.washplan_name);
-                $('#editServiceDescription').val(service.washplan_description);
-                $('#editServicePrice').val(service.washplan_price);
-                $('#editServiceDuration').val(service.washplan_duration);
-                $('#editServiceModal').modal('show');
-            }
-        }, 'json');
+      const serviceId = $(this).data('id');
+      $.get('/Guerrero/CarWash_Management_System/controller/services.php?action=getServices', function(services) {
+        const service = services.find(s => s.washplan_id == serviceId);
+        if (service) {
+          $('#editServiceId').val(service.washplan_id);
+          $('#editServiceName').val(service.washplan_name);
+          $('#editServiceDescription').val(service.washplan_description);
+          $('#editServicePrice').val(service.washplan_price);
+          $('#editServiceDuration').val(service.washplan_duration);
+          $('#editServiceModal').modal('show');
+        }
+      }, 'json');
     });
+
 
     // Save Edit
     $('#editServiceForm').on('submit', function(e) {
-        e.preventDefault();
-        const data = $(this).serialize();
-        $.post('../../CarWash_Management_System/controller/services.php?action=updateService', data, function(res) {
-            alert(res.message);
-            if(res.status === 'success') {
-                $('#editServiceModal').modal('hide');
-                loadServices();
-            }
-        }, 'json');
+      e.preventDefault();
+      const data = $(this).serialize();
+      $.post('../../CarWash_Management_System/controller/services.php?action=updateService', data, function(res) {
+        alert(res.message);
+        if (res.status === 'success') {
+          $('#editServiceModal').modal('hide');
+          loadServices();
+        }
+      }, 'json');
     });
-});
+  });
 </script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(135deg, #0a192f, #001f54);
+  color: #fff;
+  min-height: 100vh;
+  padding-top: 70px;
+}
+
+/* Gradient Text */
+.text-gradient {
+  background: linear-gradient(to right, #38bdf8, #0ea5e9, #1d4ed8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Muted text */
+.text-muted-light {
+  color: #9ca3af;
+}
+
+/* Glass card */
+.card-glass {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.2);
+  backdrop-filter: blur(15px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #fff;
+}
+.card-glass:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(14, 165, 233, 0.35);
+}
+
+/* Table Gradient (if needed) */
+.table-gradient {
+  background: linear-gradient(to right, #0ea5e9, #1d4ed8);
+}
+.table-dark {
+  color: #fff;
+}
+
+/* Inputs */
+.form-control {
+  border-radius: 10px;
+  padding: 10px;
+}
+.form-control:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.6);
+  border: 1px solid #0ea5e9;
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(to right, #0ea5e9, #1d4ed8);
+  border: none;
+  font-weight: 600;
+}
+.btn-primary:hover {
+  opacity: 0.9;
+}
+.btn-success {
+  background: linear-gradient(to right, #10b981, #059669);
+  border: none;
+  font-weight: 600;
+}
+.btn-success:hover {
+  opacity: 0.9;
+}
+
+/* Switches */
+.form-check-input:checked {
+  background-color: #0ea5e9;
+  border-color: #0ea5e9;
+}
+</style>

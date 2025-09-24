@@ -2,22 +2,25 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Auto Shine</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet" />
-  <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Shine | Home</title>
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+  <style>
     body {
       font-family: 'Quicksand', sans-serif;
       background: linear-gradient(135deg, #0a192f, #001f54);
       color: #fff;
+      scroll-behavior: smooth;
     }
 
     .carousel,
@@ -119,7 +122,6 @@
 </head>
 
 <body>
-
   <div class="container-fluid p-0 position-relative">
     <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
       <!-- Indicators -->
@@ -129,7 +131,7 @@
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"></button>
       </div>
 
-      <!-- Slides (images only) -->
+      <!-- Slides -->
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="https://i.pinimg.com/1200x/62/4c/eb/624ceb1dde337b8e178f266963f018dd.jpg" alt="Car Wash 1">
@@ -142,25 +144,58 @@
         </div>
       </div>
 
-      <!-- Fixed Caption -->
+      <!-- Fixed Caption (Dynamic) -->
       <div class="fixed-caption">
-        <h1>Auto Shine Carwash</h1>
-        <p>
-          Bringing out the best shine in every ride. At <strong>Auto Shine</strong>, we go beyond a
-          simple wash — delivering premium cleaning, fast service, and a showroom finish every time.
+        <h1 id="homeHeader">Auto Shine Carwash</h1>
+        <p id="homeDesc">
+          Bringing out the best shine in every ride. At <strong>Auto Shine</strong>, we go beyond a simple wash —
+          delivering premium cleaning, fast service, and a showroom finish every time.
         </p>
         <button class="btn btn-primary openModal">Book Now</button>
-        <?php include 'client_modal.php'; ?>
         <div class="contact-info">
-          <p><i class="fas fa-map-marker-alt"></i> 123 Shine Street, Auto City</p>
-          <p><i class="fas fa-phone-alt"></i> (123) 456-7890</p>
-          <p><i class="fas fa-envelope"></i> info@autoshine.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> <span id="homeLocation">123 Shine Street, Auto City</span></p>
+          <p><i class="fas fa-phone-alt"></i> <span id="homeNumber">(123) 456-7890</span></p>
+          <p><i class="fas fa-envelope"></i> <span id="homeEmail">info@autoshine.com</span></p>
         </div>
       </div>
+
+      <?php include 'client_modal.php'; ?>
     </div>
   </div>
 
-  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Dynamic Caption Script -->
+  <script>
+    $(function() {
+      function loadHomeCaption() {
+        $.ajax({
+          url: '/Guerrero/CarWash_Management_System/controller/home.php', // returns JSON
+          type: 'GET',
+          dataType: 'json',
+          success: function(res) {
+            if (res.status === 'success' && res.data) {
+              $('#homeHeader').text(res.data.crsl_header);
+              $('#homeDesc').html(res.data.crsl_desc);
+              $('#homeLocation').text(res.data.crsl_location);
+              $('#homeEmail').text(res.data.crsl_email);
+              $('#homeNumber').text(res.data.crsl_number);
+            } else {
+              console.warn('⚠ Home caption data not found');
+            }
+          },
+          error: function() {
+            console.error('⚠ Failed to load home caption');
+          }
+        });
+      }
+
+      loadHomeCaption(); // load on page ready
+    });
+  </script>
 </body>
 
 </html>
