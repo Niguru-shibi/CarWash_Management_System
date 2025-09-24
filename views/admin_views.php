@@ -61,11 +61,13 @@
   <script>
     $(function() {
       // Function to load a page via AJAX
+      // Function to load a page via AJAX
       function loadPage(url) {
         $.ajax({
           url: url,
           type: "GET",
           success: function(data) {
+            console.log("Loaded content:", data); // Debug: see what HTML is returned
             $("#mainContent").html(data);
           },
           error: function() {
@@ -73,6 +75,7 @@
           }
         });
       }
+
 
       // Handle the sidebar clicks
       $(document).on("click", ".load-page", function(e) {
@@ -93,11 +96,35 @@
   <!-- End AJax Script -->
 
   <!-- Bootstrap 5 Scripts -->
-  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/library/bootstrap.bundle.min.js"></script>
 
   <!-- Datatables Scripts -->
-  <script src="../assets/js/datatables.min.js"></script>
+  <script src="../assets/js/library/datatables.min.js"></script>
 
-  
+  <script>
+    // Theme toggle click handler
+    $(document).on("click", "#themeToggle", function() {
+      $("body").toggleClass("light"); // Toggle light/dark
+      $(this).find("i").toggleClass("bi-moon bi-brightness-high"); // Toggle icon
+
+      // Save theme preference
+      const theme = $("body").hasClass("light") ? "light" : "dark";
+      localStorage.setItem("theme", theme);
+    });
+
+    // Apply saved theme on page load
+    $(document).ready(function() {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light") {
+        $("body").addClass("light");
+        $("#themeToggle i").removeClass("bi-moon").addClass("bi-brightness-high");
+      }
+    });
+  </script>
+
+
+
+
 </body>
+
 </html>

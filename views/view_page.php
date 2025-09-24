@@ -5,7 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Car Wash Management System</title>
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Animate On Scroll Library -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
@@ -16,7 +18,6 @@
         <?php include "pages/home.php"; ?>
     </section>
 
-    <!-- ✅ REMOVE the section wrapper here -->
     <?php include "../views/nav/navbar.php"; ?>
 
     <section id="about">
@@ -40,10 +41,13 @@
         <?php include "pages/contact.php"; ?>
     </section>
 
-    <!-- ✅ REMOVE the section wrapper here -->
     <?php include "../views/nav/footer.php"; ?>
 
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery (required for Bootstrap JS) -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Bootstrap JS Bundle (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Animate On Scroll Library -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>

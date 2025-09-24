@@ -102,10 +102,10 @@
 
 
   <!-- Bootstra 5 Scripts -->
-  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/library/bootstrap.bundle.min.js"></script>
 
   <!-- Datatables Scripts -->
-  <script src="../assets/js/datatables.min.js"></script>
+  <script src="../assets/js/library/datatables.min.js"></script>
 
 </body>
 

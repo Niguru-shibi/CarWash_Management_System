@@ -1,5 +1,3 @@
-
-
 <!-- Page Banner -->
 <div class="card-glass text-center mt-5 mx-3 p-4">
   <h2 class="fw-bold text-gradient">✨ Manage Services</h2>
@@ -21,25 +19,8 @@
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Basic Wash</td>
-            <td>Exterior wash with tire cleaning and air dry.</td>
-            <td>₱199</td>
-            <td>30 mins</td>
-            <td>
-              <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editServiceModal">Edit</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Premium Wash</td>
-            <td>Exterior & interior wash, tire & rim cleaning, wax coating.</td>
-            <td>₱399</td>
-            <td>1 hr</td>
-            <td>
-              <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editServiceModal">Edit</button>
-            </td>
-          </tr>
+        <tbody id="servicesTableBody">
+          <!-- Dynamic content will load here -->
         </tbody>
       </table>
     </div>
@@ -59,23 +40,23 @@
         <h5 class="modal-title">Add New Service</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
-      <form>
+      <form id="addServiceForm">
         <div class="modal-body">
           <div class="mb-3">
             <label class="form-label">Service Name</label>
-            <input type="text" class="form-control" placeholder="Enter service name">
+            <input type="text" class="form-control" name="serviceName" placeholder="Enter service name" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Description</label>
-            <textarea class="form-control" rows="3" placeholder="Enter service description"></textarea>
+            <textarea class="form-control" name="description" rows="3" placeholder="Enter service description" required></textarea>
           </div>
           <div class="mb-3">
             <label class="form-label">Price</label>
-            <input type="text" class="form-control" placeholder="₱0.00">
+            <input type="number" class="form-control" name="price" placeholder="₱0.00" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Duration</label>
-            <input type="text" class="form-control" placeholder="e.g. 45 mins">
+            <input type="text" class="form-control" name="duration" placeholder="e.g. 45 mins" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -95,23 +76,24 @@
         <h5 class="modal-title">Edit Service</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
-      <form>
+      <form id="editServiceForm">
+        <input type="hidden" name="id" id="editServiceId">
         <div class="modal-body">
           <div class="mb-3">
             <label class="form-label">Service Name</label>
-            <input type="text" class="form-control" value="Basic Wash">
+            <input type="text" class="form-control" name="serviceName" id="editServiceName" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Description</label>
-            <textarea class="form-control" rows="3">Exterior wash with tire cleaning and air dry.</textarea>
+            <textarea class="form-control" name="description" id="editServiceDescription" rows="3" required></textarea>
           </div>
           <div class="mb-3">
             <label class="form-label">Price</label>
-            <input type="text" class="form-control" value="₱199">
+            <input type="number" class="form-control" name="price" id="editServicePrice" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Duration</label>
-            <input type="text" class="form-control" value="30 mins">
+            <input type="text" class="form-control" name="duration" id="editServiceDuration" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -123,75 +105,91 @@
   </div>
 </div>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
-
-body {
-  font-family: 'Quicksand', sans-serif;
-  background: linear-gradient(135deg, #0a192f, #001f54);
-  color: #fff;
-  min-height: 100vh;
-  padding-top: 70px;
-}
-
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  background: linear-gradient(to right, #38bdf8, #0ea5e9, #1d4ed8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Cards */
-.card-glass {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.2);
-  backdrop-filter: blur(15px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  color: #fff;
-}
-.card-glass:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 25px rgba(14, 165, 233, 0.35);
-}
-
-/* Gradient Text */
-.text-gradient {
-  background: linear-gradient(to right, #38bdf8, #0ea5e9, #1d4ed8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.text-muted-light {
-  color: #9ca3af;
-}
-
-/* Table */
-.table-gradient {
-  background: linear-gradient(to right, #0ea5e9, #1d4ed8);
-}
-.table-dark {
-  color: #fff;
-}
-
-/* Light Mode */
-body.light {
-  background: #f9fafb;
-  color: #111;
-}
-body.light .card-glass {
-  background: rgba(255, 255, 255, 0.9);
-  color: #111;
-}
-</style>
-
 <script>
-  const themeToggle = document.getElementById("themeToggle");
-  themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("light");
-    themeToggle.classList.toggle("bi-brightness-high");
-    themeToggle.classList.toggle("bi-moon-stars");
-  });
+$(function() {
+    function loadServices() {
+        $.ajax({
+            url: '../../CarWash_Management_System/controller/services.php?action=getServices',
+            type: 'GET',
+            dataType: 'json',
+            success: function(services) {
+                $('#servicesTableBody').empty();
+                services.forEach(function(service) {
+                    let row = `
+                        <tr>
+                            <td>${service.washplan_name}</td>
+                            <td>${service.washplan_description}</td>
+                            <td>₱${service.washplan_price}</td>
+                            <td>${service.washplan_duration}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary editServiceBtn" data-id="${service.washplan_id}">Edit</button>
+                                <button class="btn btn-sm btn-danger deleteServiceBtn" data-id="${service.washplan_id}">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                    $('#servicesTableBody').append(row);
+                });
+            },
+            error: function() {
+                $('#servicesTableBody').html('<tr><td colspan="5" class="text-center text-danger">Failed to load services.</td></tr>');
+            }
+        });
+    }
+
+    loadServices(); // initial load
+
+    // Add Service
+    $('#addServiceForm').on('submit', function(e) {
+        e.preventDefault();
+        const data = $(this).serialize();
+        $.post('../../CarWash_Management_System/controller/services.php?action=addService', data, function(res) {
+            alert(res.message);
+            if(res.status === 'success') {
+                $('#addServiceModal').modal('hide');
+                $('#addServiceForm')[0].reset();
+                loadServices();
+            }
+        }, 'json');
+    });
+
+    // Delete Service
+    $(document).on('click', '.deleteServiceBtn', function() {
+        const serviceId = $(this).data('id');
+        if(confirm('Are you sure you want to delete this service?')) {
+            $.post('../../CarWash_Management_System/controller/services.php?action=deleteService', { id: serviceId }, function(res) {
+                alert(res.message);
+                loadServices();
+            }, 'json');
+        }
+    });
+
+    // Edit Service
+    $(document).on('click', '.editServiceBtn', function() {
+        const serviceId = $(this).data('id');
+        $.get('../../CarWash_Management_System/controller/services.php?action=getServices', function(services) {
+            const service = services.find(s => s.washplan_id == serviceId);
+            if(service) {
+                $('#editServiceId').val(service.washplan_id);
+                $('#editServiceName').val(service.washplan_name);
+                $('#editServiceDescription').val(service.washplan_description);
+                $('#editServicePrice').val(service.washplan_price);
+                $('#editServiceDuration').val(service.washplan_duration);
+                $('#editServiceModal').modal('show');
+            }
+        }, 'json');
+    });
+
+    // Save Edit
+    $('#editServiceForm').on('submit', function(e) {
+        e.preventDefault();
+        const data = $(this).serialize();
+        $.post('../../CarWash_Management_System/controller/services.php?action=updateService', data, function(res) {
+            alert(res.message);
+            if(res.status === 'success') {
+                $('#editServiceModal').modal('hide');
+                loadServices();
+            }
+        }, 'json');
+    });
+});
 </script>

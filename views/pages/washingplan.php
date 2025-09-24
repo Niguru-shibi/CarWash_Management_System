@@ -1,134 +1,141 @@
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
 
-<style>
-  /* Section Background */
-  .price {
-    background: linear-gradient(135deg, #001f54, #0a192f, #003566, #0d6efd);
-    background-size: 300% 300%;
-    animation: gradientBG 12s ease infinite;
-    color: #fff;
-    padding: 5rem 0;
-  }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Washing Plans | Auto Shine</title>
 
-  /* Gradient Animation (same for all sections) */
-  @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-  .price .section-header p {
-    color: #00bfff;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
+  <style>
+    /* Section Background */
+    .price {
+      background: linear-gradient(135deg, #001f54, #0a192f, #003566, #0d6efd);
+      background-size: 300% 300%;
+      animation: gradientBG 12s ease infinite;
+      color: #fff;
+      padding: 5rem 0;
+    }
 
-  .price .section-header h2 {
-    color: #fff;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
 
-  .price .section-header p:last-child {
-    color: #d0d0d0;
-    max-width: 600px;
-    margin: 0 auto;
-    font-size: 1rem;
-  }
+      50% {
+        background-position: 100% 50%;
+      }
 
-  /* Price Cards */
-  .price-item {
-    background: #112b45;
-    border-radius: 16px;
-    padding: 2rem 1.5rem;
-    transition: transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    height: 100%;
-  }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
 
-  .price-item:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 12px 30px rgba(0, 191, 255, 0.4);
-  }
+    .price .section-header p {
+      color: #00bfff;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
 
-  .price-header h3 {
-    color: #00bfff;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
+    .price .section-header h2 {
+      color: #fff;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
 
-  .price-header h2 {
-    font-size: 2.5rem;
-    color: #fff;
-  }
+    .price .section-header p:last-child {
+      color: #d0d0d0;
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1rem;
+    }
 
-  .price-header h2 span {
-    font-size: 1.2rem;
-  }
+    /* Price Cards */
+    .price-item {
+      background: #112b45;
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      height: 100%;
+    }
 
-  .price-body ul {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-  }
+    .price-item:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(0, 191, 255, 0.4);
+    }
 
-  .price-body ul li {
-    margin: 0.5rem 0;
-    font-size: 0.95rem;
-    color: #d0d0d0;
-  }
+    .price-header h3 {
+      color: #00bfff;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
 
-  .price-body ul li i {
-    margin-right: 8px;
-  }
+    .price-header h2 {
+      font-size: 2.5rem;
+      color: #fff;
+    }
 
-  .price-footer .btn {
-    border-radius: 30px;
-    padding: 0.5rem 1.5rem;
-    font-weight: 500;
-    transition: background 0.3s, color 0.3s;
-  }
+    .price-header h2 span {
+      font-size: 1.2rem;
+    }
 
-  .btn-custom {
-    background: #00bfff;
-    color: #fff;
-  }
+    .price-body ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
 
-  .btn-custom:hover {
-    background: #0095cc;
-    color: #fff;
-  }
+    .price-body ul li {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+      color: #d0d0d0;
+    }
 
-  /* Highlighted Featured Item */
-  .featured-item {
-    background: linear-gradient(135deg, #00bfff, #0d6efd);
-    color: #fff;
-    transform: scale(1.05);
-  }
+    .price-body ul li i {
+      margin-right: 8px;
+    }
 
-  .featured-item .price-header h3 {
-    color: #fff;
-  }
+    .price-footer .btn {
+      border-radius: 30px;
+      padding: 0.5rem 1.5rem;
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
+    }
 
-  .featured-item .btn {
-    background: #fff;
-    color: #0d6efd;
-    font-weight: 600;
-  }
+    .featured-item {
+      background: linear-gradient(135deg, #00bfff, #0d6efd);
+      color: #fff;
+      transform: scale(1.05);
+    }
 
-  .featured-item .btn:hover {
-    background: #d9e9ff;
-    color: #0a2a43;
-  }
-</style>
+    .featured-item .price-header h3 {
+      color: #fff;
+    }
+
+    .featured-item .btn {
+      background: #fff;
+      color: #0d6efd;
+      font-weight: 600;
+    }
+
+    .featured-item .btn:hover {
+      background: #d9e9ff;
+      color: #0a2a43;
+    }
+  </style>
 </head>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <body>
 
-  <!-- Price Start -->
+  <!-- Price Section -->
   <div class="price">
     <div class="container">
       <div class="section-header text-center mb-5">
@@ -140,80 +147,70 @@
         </p>
       </div>
 
-      <div class="row">
-  <!-- Basic Cleaning -->
-  <div class="col-lg-3 col-md-6 mb-4">
-    <div class="price-item text-center">
-      <div class="price-header mb-3">
-        <h3>Basic Cleaning</h3>
-        <h2><span>$</span><strong>10</strong><span>.99</span></h2>
-      </div>
-      <div class="price-body mb-4">
-        <ul>
-          <li><i class="far fa-check-circle text-success"></i> Seats Washing</li>
-          <li><i class="far fa-check-circle text-success"></i> Vacuum Cleaning</li>
-          <li><i class="far fa-check-circle text-success"></i> Exterior Cleaning</li>
-          <li><i class="far fa-times-circle text-danger"></i> Interior Wet Cleaning</li>
-          <li><i class="far fa-times-circle text-danger"></i> Window Wiping</li>
-        </ul>
-      </div>
-      <div class="price-footer">
-       <button class="btn btn-primary openModal">Book Now</button>
-        <?php include 'client_modal.php'; ?>
+      <div class="row" id="washingPlansContainer">
+        <!-- Dynamic washing plans will be loaded here -->
       </div>
     </div>
   </div>
 
-  <!-- Premium Cleaning (Featured) -->
-  <div class="col-lg-3 col-md-6 mb-4">
-    <div class="price-item text-center featured-item">
-      <div class="price-header mb-3">
-        <h3>Premium Cleaning</h3>
-        <h2><span>$</span><strong>20</strong><span>.99</span></h2>
-      </div>
-      <div class="price-body mb-4">
-        <ul>
-          <li><i class="far fa-check-circle text-light"></i> Seats Washing</li>
-          <li><i class="far fa-check-circle text-light"></i> Vacuum Cleaning</li>
-          <li><i class="far fa-check-circle text-light"></i> Exterior Cleaning</li>
-          <li><i class="far fa-check-circle text-light"></i> Interior Wet Cleaning</li>
-          <li><i class="far fa-times-circle text-dark"></i> Window Wiping</li>
-        </ul>
-      </div>
-      <div class="price-footer">
-        <button class="btn btn-primary openModal">Book Now</button>
-        <?php include 'client_modal.php'; ?>
-      </div>
-    </div>
-  </div>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-  <!-- Complex Cleaning -->
-  <div class="col-lg-3 col-md-6 mb-4">
-    <div class="price-item text-center">
-      <div class="price-header mb-3">
-        <h3>Complex Cleaning</h3>
-        <h2><span>$</span><strong>30</strong><span>.99</span></h2>
-      </div>
-      <div class="price-body mb-4">
-        <ul>
-          <li><i class="far fa-check-circle text-success"></i> Seats Washing</li>
-          <li><i class="far fa-check-circle text-success"></i> Vacuum Cleaning</li>
-          <li><i class="far fa-check-circle text-success"></i> Exterior Cleaning</li>
-          <li><i class="far fa-check-circle text-success"></i> Interior Wet Cleaning</li>
-          <li><i class="far fa-check-circle text-success"></i> Window Wiping</li>
-        </ul>
-      </div>
-      <div class="price-footer">
-        <button class="btn btn-primary openModal">Book Now</button>
-        <?php include 'client_modal.php'; ?>
-    </div>
-  </div>
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
+  <!-- Dynamic AJAX Script -->
+  <script>
+    $(function() {
+      function loadWashingPlans() {
+        $.ajax({
+          url: '../../CarWash_Management_System/controller/services.php?action=getServices',
+          type: 'GET',
+          dataType: 'json',
+          success: function(plans) {
+            $('#washingPlansContainer').empty();
+            if (plans.length === 0) {
+              $('#washingPlansContainer').html('<div class="col-12 text-center text-light">No washing plans available.</div>');
+              return;
+            }
+            plans.forEach(function(plan) {
+              let planHTML = `
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="price-item text-center ${plan.featured ? 'featured-item' : ''}">
+                    <div class="price-header mb-3">
+                      <h3>${plan.washplan_name}</h3>
+                      <h2><span>₱</span><strong>${plan.washplan_price}</strong></h2>
+                    </div>
+                    <div class="price-body mb-4">
+                      <ul>
+                        <li>${plan.washplan_description}</li>
+                        <li>Duration: ${plan.washplan_duration}</li>
+                      </ul>
+                    </div>
+                    <div class="price-footer">
+                      <button class="btn btn-primary openModal">Book Now</button>
+                      <?php include 'client_modal.php'; ?>
+                    </div>
+                  </div>
+                </div>`;
+              $('#washingPlansContainer').append(planHTML);
+            });
+          },
+          error: function() {
+            $('#washingPlansContainer').html('<div class="col-12 text-center text-danger">⚠ Unable to load washing plans. Please try again later.</div>');
+          }
+        });
+      }
 
-</div>
+      loadWashingPlans();
 
+      // Handle booking modal
+      $(document).on('click', '.openModal', function() {
+        $('#clientBookingModal').modal('show');
+      });
+    });
+  </script>
 
-  <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 </body>
+
+</html>
