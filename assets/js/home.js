@@ -1,11 +1,10 @@
 $(function () {
-    // Load home info when page is ready
+    // === Load Home Info when page is ready ===
     loadHomeInfo();
 
-    // === Load Home Info ===
     function loadHomeInfo() {
         $.ajax({
-            url: 'controller/home.php', // backend script to fetch data
+            url: 'controller/update_home.php', // unified GET + POST
             type: 'GET',
             dataType: 'json',
             success: function (res) {
@@ -75,7 +74,12 @@ $(function () {
             success: function (res) {
                 if (res.status === 'success') {
                     alert("✅ Home info updated successfully!");
-                    $("#editHomeModal").modal("hide");
+
+                    // Hide modal properly in Bootstrap 5
+                    let modalEl = document.getElementById('editHomeModal');
+                    let modal = bootstrap.Modal.getInstance(modalEl);
+                    modal.hide();
+
                     loadHomeInfo(); // refresh table
                 } else {
                     alert("⚠ Update failed: " + res.message);

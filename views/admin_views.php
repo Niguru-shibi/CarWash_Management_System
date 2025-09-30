@@ -16,9 +16,6 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
-  <!-- jQuery CDN (must be before this script) -->
-  <script src="../assets/js/jquery.js"></script>
-
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -57,17 +54,26 @@
     <!-- Blank Page -->
   </main>
 
-  <!-- AJax Script -->
+  <!-- ================= SCRIPTS ================= -->
+
+  <!-- jQuery (must be first; using CDN to avoid 404 issues) -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+  <!-- Bootstrap 5 Scripts -->
+  <script src="../assets/js/library/bootstrap.bundle.min.js"></script>
+
+  <!-- DataTables Scripts -->
+  <script src="../assets/js/library/datatables.min.js"></script>
+
+  <!-- AJAX Page Loader -->
   <script>
     $(function() {
-      // Function to load a page via AJAX
       // Function to load a page via AJAX
       function loadPage(url) {
         $.ajax({
           url: url,
           type: "GET",
           success: function(data) {
-            console.log("Loaded content:", data); // Debug: see what HTML is returned
             $("#mainContent").html(data);
           },
           error: function() {
@@ -76,16 +82,12 @@
         });
       }
 
-
       // Handle the sidebar clicks
       $(document).on("click", ".load-page", function(e) {
         e.preventDefault();
-
         let url = $(this).attr("href");
-
         $(".nav-link").removeClass("active");
         $(this).addClass("active");
-
         loadPage(url);
       });
 
@@ -93,14 +95,8 @@
       loadPage("dashboard/admin_dashboard.php");
     });
   </script>
-  <!-- End AJax Script -->
 
-  <!-- Bootstrap 5 Scripts -->
-  <script src="../assets/js/library/bootstrap.bundle.min.js"></script>
-
-  <!-- Datatables Scripts -->
-  <script src="../assets/js/library/datatables.min.js"></script>
-
+  <!-- Theme Toggle -->
   <script>
     // Theme toggle click handler
     $(document).on("click", "#themeToggle", function() {
@@ -122,9 +118,5 @@
     });
   </script>
 
-
-
-
 </body>
-
 </html>

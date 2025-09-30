@@ -163,17 +163,17 @@
     </div>
   </div>
 
-  <!-- jQuery -->
+    <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <!-- Bootstrap JS -->
-  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/library/bootstrap.bundle.min.js"></script>
 
   <!-- Dynamic Caption Script -->
   <script>
     $(function() {
       function loadHomeCaption() {
         $.ajax({
-          url: '/Guerrero/CarWash_Management_System/controller/home.php', // returns JSON
+          url: '../controller/update_home.php', // corrected path
           type: 'GET',
           dataType: 'json',
           success: function(res) {
@@ -187,15 +187,14 @@
               console.warn('⚠ Home caption data not found');
             }
           },
-          error: function() {
-            console.error('⚠ Failed to load home caption');
+          error: function(xhr) {
+            console.error('⚠ Failed to load website info:', xhr.statusText);
           }
         });
       }
 
-      loadHomeCaption(); // load on page ready
+      loadHomeCaption();
     });
   </script>
 </body>
-
 </html>

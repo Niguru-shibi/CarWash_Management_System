@@ -89,7 +89,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../assets/js/home.js"></script>
 
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
 
@@ -97,41 +96,35 @@ body {
   font-family: 'Quicksand', sans-serif;
   background: linear-gradient(135deg, #0a192f, #001f54);
   color: #fff;
+  min-height: 100vh;
+  padding-top: 70px;
 }
 
-/* Banner */
-.banner {
-  background: linear-gradient(135deg, #0ea5e9, #1d4ed8);
-  color: white;
-  border-radius: 0.8rem;
-  padding: 2rem 1.5rem;
-  margin: 1rem auto 2rem auto;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(14, 165, 233, 0.25);
-}
-.banner h1 {
+
+.logo {
+  font-size: 1.5rem;
   font-weight: 700;
-}
-.text-muted-light {
-  color: #cbd5e1;
+  background: linear-gradient(to right, #38bdf8, #0ea5e9, #1d4ed8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Cards */
 .card-glass {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 15px;
-  backdrop-filter: blur(12px);
   box-shadow: 0 8px 20px rgba(14, 165, 233, 0.2);
-  color: #fff;
+  backdrop-filter: blur(15px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #fff;
 }
 .card-glass:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 25px rgba(14, 165, 233, 0.35);
 }
 
-/* Gradient Header */
+/* Gradient Text */
 .text-gradient {
   background: linear-gradient(to right, #38bdf8, #0ea5e9, #1d4ed8);
   -webkit-background-clip: text;
@@ -145,14 +138,18 @@ body {
 .table-dark {
   color: #fff;
 }
-.btn-cyan {
-  background: linear-gradient(90deg, #06b6d4, #3b82f6);
-  border: none;
-  color: #fff;
-  font-weight: 600;
-  transition: 0.3s;
+.text-muted-light {
+  color: #9ca3af;
 }
-.btn-cyan:hover {
-  opacity: 0.9;
+
+/* Light Mode */
+body.light {
+  background: #f9fafb;
+  color: #111;
+}
+body.light .card-glass {
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
 }
 </style>
+
