@@ -11,8 +11,6 @@
 
   <!-- Bootstrap CSS -->
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
   <style>
@@ -146,16 +144,15 @@
 
       <!-- Fixed Caption (Dynamic) -->
       <div class="fixed-caption">
-        <h1 id="homeHeader">Auto Shine Carwash</h1>
-        <p id="homeDesc">
-          Bringing out the best shine in every ride. At <strong>Auto Shine</strong>, we go beyond a simple wash —
-          delivering premium cleaning, fast service, and a showroom finish every time.
-        </p>
-        <button class="btn btn-primary openModal">Book Now</button>
+        <h1 id="homeHeader"></h1>
+        <p id="homeDesc"></p>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#clientModal">
+          Book Now
+        </button>
         <div class="contact-info">
-          <p><i class="fas fa-map-marker-alt"></i> <span id="homeLocation">123 Shine Street, Auto City</span></p>
-          <p><i class="fas fa-phone-alt"></i> <span id="homeNumber">(123) 456-7890</span></p>
-          <p><i class="fas fa-envelope"></i> <span id="homeEmail">info@autoshine.com</span></p>
+          <p><i class="fas fa-map-marker-alt"></i> <span id="homeLocation"></span></p>
+          <p><i class="fas fa-phone-alt"></i> <span id="homeNumber"></span></p>
+          <p><i class="fas fa-envelope"></i> <span id="homeEmail"></span></p>
         </div>
       </div>
 
@@ -163,38 +160,29 @@
     </div>
   </div>
 
-    <!-- jQuery -->
+  
+  <!-- jQuery + Bootstrap + Dynamic -->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <!-- Bootstrap JS -->
   <script src="../assets/js/library/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/home.js"></script>
 
-  <!-- Dynamic Caption Script -->
-  <script>
-    $(function() {
-      function loadHomeCaption() {
-        $.ajax({
-          url: '../controller/update_home.php', // corrected path
-          type: 'GET',
-          dataType: 'json',
-          success: function(res) {
-            if (res.status === 'success' && res.data) {
-              $('#homeHeader').text(res.data.crsl_header);
-              $('#homeDesc').html(res.data.crsl_desc);
-              $('#homeLocation').text(res.data.crsl_location);
-              $('#homeEmail').text(res.data.crsl_email);
-              $('#homeNumber').text(res.data.crsl_number);
-            } else {
-              console.warn('⚠ Home caption data not found');
-            }
-          },
-          error: function(xhr) {
-            console.error('⚠ Failed to load website info:', xhr.statusText);
-          }
-        });
-      }
-
-      loadHomeCaption();
-    });
-  </script>
 </body>
+
+<script>
+  $.ajax({
+    url: '../controller/update_home.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(res) {
+      if (res.status === 'success' && res.data) {
+        $('#homeHeader').text(res.data.crsl_header);
+        $('#homeDesc').html(res.data.crsl_desc);
+        $('#homeLocation').text(res.data.crsl_location);
+        $('#homeEmail').text(res.data.crsl_email);
+        $('#homeNumber').text(res.data.crsl_number);
+      }
+    }
+  });
+</script>
+
 </html>

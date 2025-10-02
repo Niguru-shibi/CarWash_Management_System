@@ -1,48 +1,29 @@
 <?php
-class Home
-{
-    private $conn;
-    private $table = "home_crsl_tb";
+require_once __DIR__ . "/config/connect_db.php";
 
-    public function __construct($db)
-    {
-        $this->conn = $db;
+class Home extends Connector {
+
+    // Get website info (latest row or single config)
+    public function getInfo() {
+        $sql = "SELECT * FROM home_info LIMIT 1"; 
+        $result = $this->conn->query($sql);
+        return $result->fetch_assoc();
     }
 
-    // ✅ Get latest home info
-    public function getHomeInfo()
-    {
-        $sql = "SELECT * FROM {$this->table} ORDER BY crsl_id DESC LIMIT 1";
-        $stmt = $this->conn->prepare($sql);
-
-        if ($stmt && $stmt->execute()) {
-            $result = $stmt->get_result();
-            if ($result && $result->num_rows > 0) {
-                return $result->fetch_assoc();
-            }
-        }
-        return null;
-    }
-
-    // ✅ Update home info
-    public function updateHomeInfo($id, $header, $desc, $location, $email, $number)
-    {
-        $stmt = $this->conn->prepare("
-            UPDATE {$this->table} 
-            SET crsl_header = ?, crsl_desc = ?, crsl_location = ?, crsl_email = ?, crsl_number = ?
-            WHERE crsl_id = ?
-        ");
-
-        if (!$stmt) {
-            return ["success" => false, "message" => "Prepare failed: " . $this->conn->error];
-        }
-
-        $stmt->bind_param("sssssi", $header, $desc, $location, $email, $number, $id);
-
-        if ($stmt->execute()) {
-            return ["success" => true, "message" => "Home info updated successfully"];
-        } else {
-            return ["success" => false, "message" => "Execution failed: " . $stmt->error];
-        }
+    // Update website info
+    public function updateInfo($data) {
+        $stmt = $this->conn->prepare("UPDATE home_info 
+            SET crsl_header=?, crsl_desc=?, crsl_location=?, crsl_email=?, crsl_number=? 
+            WHERE id=?");
+        $stmt->bind_param(
+            "sssssi", 
+            $data['crsl_header'], 
+            $data['crsl_desc'], 
+            $data['crsl_location'], 
+            $data['crsl_email'], 
+            $data['crsl_number'], 
+            $data['id']
+        );
+        return $stmt->execute();
     }
 }
