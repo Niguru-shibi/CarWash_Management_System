@@ -146,9 +146,10 @@
       <div class="fixed-caption">
         <h1 id="homeHeader"></h1>
         <p id="homeDesc"></p>
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#clientModal">
+        <button class="btn btn-success openModal">
           Book Now
         </button>
+
         <div class="contact-info">
           <p><i class="fas fa-map-marker-alt"></i> <span id="homeLocation"></span></p>
           <p><i class="fas fa-phone-alt"></i> <span id="homeNumber"></span></p>
@@ -160,10 +161,10 @@
     </div>
   </div>
 
-  
+
   <!-- jQuery + Bootstrap + Dynamic -->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="../assets/js/library/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/home.js"></script>
 
 </body>
@@ -180,6 +181,20 @@
         $('#homeLocation').text(res.data.crsl_location);
         $('#homeEmail').text(res.data.crsl_email);
         $('#homeNumber').text(res.data.crsl_number);
+
+        // ✅ Close modal safely with cleanup
+        setTimeout(() => {
+          const modalEl = document.getElementById("editHomeModal");
+          const modal = bootstrap.Modal.getInstance(modalEl);
+          if (modal) {
+            modal.hide();
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+          }
+        }, 300);
+      } else {
+        alert("❌ Error: " + res.message);
+
       }
     }
   });

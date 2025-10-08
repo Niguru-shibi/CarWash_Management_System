@@ -1,7 +1,7 @@
 $(function () {
     function loadServices() {
         $.ajax({
-            url: '/Guerrero/CarWash_Management_System/controller/services.php?action=getServices',
+            url: '/Guerrero/CarWash_Management_System/controller/washplan.php?action=getServices',
             type: 'GET',
             dataType: 'json',
             success: function (services) {
@@ -39,7 +39,7 @@ $(function () {
         const serviceId = $(this).data('id');
         if (confirm('Are you sure you want to delete this service?')) {
             $.post(
-                '/Guerrero/CarWash_Management_System/controller/services.php?action=deleteService',
+                '/Guerrero/CarWash_Management_System/controller/washplan.php?action=deleteService',
                 { serviceId },
                 function (res) {
                     alert(res.message);

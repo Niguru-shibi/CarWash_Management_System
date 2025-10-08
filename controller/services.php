@@ -1,73 +1,59 @@
 <?php
-session_start();
-require_once __DIR__ . '/../model/Services.php'; // Ensure class name matches
-
 header('Content-Type: application/json');
+require_once "../model/Services.php";
 
-$serviceModel = new Service();
+$services = new Services();
+$action = $_GET['action'] ?? $_POST['action'] ?? null;
 
-// ---------------- Add New Washing Plan ----------------
-if (isset($_GET['action']) && $_GET['action'] === 'addService') {
-    if (isset($_POST['serviceName'], $_POST['price'], $_POST['description'], $_POST['duration'])) {
-        $inserted = $serviceModel->addService(
-            $_POST['serviceName'],
-            $_POST['price'],
-            $_POST['description'],
-            $_POST['duration']
-        );
-
-        echo json_encode($inserted
-            ? ["status" => "success", "message" => "Washing plan added successfully!"]
-            : ["status" => "error", "message" => "Failed to add washing plan."]
-        );
-    } else {
-        echo json_encode(["status" => "error", "message" => "Missing required fields"]);
-    }
+if (!$action) {
+    echo json_encode(['status' => 'error', 'message' => 'No action specified.']);
     exit;
 }
 
-// ---------------- Get All Washing Plans ----------------
-if (isset($_GET['action']) && $_GET['action'] === 'getServices') {
-    $services = $serviceModel->getAllServices();
-    echo json_encode($services ? $services : []);
-    exit;
+switch ($action) {
+
+    // GET ALL SERVICES
+    case 'getServices':
+        $allServices = $services->getAllServices();
+        echo json_encode($allServices);
+        break;
+
+    // GET SINGLE SERVICE BY ID
+    case 'getService':
+        if (!isset($_GET['id'])) {
+            echo json_encode(['status' => 'error', 'message' => 'Service ID required.']);
+            break;
+        }
+        $service = $services->getServiceById((int)$_GET['id']);
+        echo json_encode($service);
+        break;
+
+    // ADD OR UPDATE SERVICE
+    case 'saveService':
+        $data = [
+            'services_id' => $_POST['services_id'] ?? null,
+            'services_icon' => $_POST['services_icon'] ?? '',
+            'services_title' => $_POST['services_title'] ?? '',
+            'services_subtitle' => $_POST['services_subtitle'] ?? '',
+            'services_description' => $_POST['services_description'] ?? '',
+            'services_list_items' => $_POST['services_list_items'] ?? '',
+            'services_status' => $_POST['services_status'] ?? 'active'
+        ];
+        $result = $services->saveService($data);
+        echo json_encode($result);
+        break;
+
+    // DELETE SERVICE
+    case 'deleteService':
+        if (!isset($_POST['serviceId'])) {
+            echo json_encode(['status' => 'error', 'message' => 'Service ID required.']);
+            break;
+        }
+        $result = $services->deleteService((int)$_POST['serviceId']);
+        echo json_encode($result);
+        break;
+
+    default:
+        echo json_encode(['status' => 'error', 'message' => 'Invalid action.']);
+        break;
 }
-
-// ---------------- Update Washing Plan ----------------
-if (isset($_GET['action']) && $_GET['action'] === 'updateService') {
-    if (isset($_POST['serviceId'], $_POST['serviceName'], $_POST['price'], $_POST['description'], $_POST['duration'])) {
-        $updated = $serviceModel->updateService(
-            $_POST['serviceId'],
-            $_POST['serviceName'],
-            $_POST['price'],
-            $_POST['description'],
-            $_POST['duration']
-        );
-
-        echo json_encode($updated
-            ? ["status" => "success", "message" => "Washing plan updated successfully!"]
-            : ["status" => "error", "message" => "Failed to update washing plan."]
-        );
-    } else {
-        echo json_encode(["status" => "error", "message" => "Missing required fields"]);
-    }
-    exit;
-}
-
-// ---------------- Delete Washing Plan ----------------
-if (isset($_GET['action']) && $_GET['action'] === 'deleteService') {
-    if (isset($_POST['serviceId'])) {
-        $deleted = $serviceModel->deleteService($_POST['serviceId']);
-
-        echo json_encode($deleted
-            ? ["status" => "success", "message" => "Washing plan deleted successfully!"]
-            : ["status" => "error", "message" => "Failed to delete washing plan."]
-        );
-    } else {
-        echo json_encode(["status" => "error", "message" => "Missing service ID"]);
-    }
-    exit;
-}
-
-// ---------------- Invalid Request ----------------
-echo json_encode(["status" => "error", "message" => "Invalid request"]);

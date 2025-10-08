@@ -132,7 +132,10 @@
       <i class="bi bi-info-circle"></i> About
     </a>
     <a href="../views/dashboard/admin_services.php" class="nav-link load-page">
-      <i class="bi bi-tools"></i> Services
+      <i class="bi bi-check"></i> Services
+    </a>
+    <a href="../views/dashboard/admin_washplan.php" class="nav-link load-page">
+      <i class="bi bi-tools"></i> Washplan
     </a>
     <a href="../views/dashboard/admin_location.php" class="nav-link load-page">
       <i class="bi bi-geo-alt"></i> Location

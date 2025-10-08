@@ -164,7 +164,7 @@
     $(function() {
       function loadWashingPlans() {
         $.ajax({
-          url: '/Guerrero/CarWash_Management_System/controller/services.php?action=getServices',
+          url: '/Guerrero/CarWash_Management_System/controller/washplan.php?action=getServices',
           type: 'GET',
           dataType: 'json',
           success: function(plans) {
